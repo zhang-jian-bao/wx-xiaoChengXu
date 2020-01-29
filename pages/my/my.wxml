@@ -1,0 +1,135 @@
+<view class="my">
+<!-- 页面整体布局开始 -->
+<view class="my_deng">
+<!-- 登录 -->
+<image src="../images/deng.png"></image>
+<view>点击登录账户</view>
+</view>
+<view class="my_yu">
+<!-- 余额开始 -->
+  <view bindtap="yu"> 
+    <view>0</view>
+    <view>余额</view>
+  </view>
+  <view class="my_yu_one" bindtap="yu">
+    <view>0</view>
+    <view>冻结</view>
+  </view>
+  <view bindtap="jiFen">
+    <view>0</view>
+    <view>积分</view>
+  </view>
+  <!-- 余额结束 -->
+</view>
+<view class="my_ding">
+<!-- 我的订单 -->
+  <view class="my_ding_one" bindtap="ding">
+    <view>我的订单 </view>
+    <image src="../images/rihgt.png"></image>
+  </view>
+  <view class="my_ding_two">
+    <view class="my_ding_three" bindtap="ding">
+      <image src="../images/fu.png"></image>
+      <view>待付款</view>
+    </view>
+    <view class="my_ding_three" bindtap="fa">
+      <image src="../images/fa.png"></image>
+      <view>待发货</view>
+    </view>
+    <view class="my_ding_three" bindtap="shou">
+      <image src="../images/shou.png"></image>
+      <view>待收货</view>
+    </view>
+    <view class="my_ding_three" bindtap="ping">
+      <image src="../images/ping.png"></image>
+      <view>待评价</view>
+    </view>
+    <view class="my_ding_three" bindtap="kuan">
+      <image src="../images/s.png"></image>
+      <view>退款/售后</view>
+    </view>
+  </view>
+<!-- 我的订单 -->
+</view>
+  <view class="cha">
+<!-- 插入广告 -->
+  <image src="../images/api_one.jpg"></image>
+</view>
+<!-- 分销商 -->
+<view class="my_ding_one my_fen" bindtap="fenXiaoShang">
+    <view>成为分销商</view>
+    <image src="../images/rihgt.png"></image>
+</view>
+
+<!-- 开票 -->
+<view class="my_kai">
+<view class="my_ding_one" bindtap="faPiao">
+    <view>申请开票</view>
+    <image src="../images/rihgt.png"></image>
+</view>
+<view class="my_ding_one my_kai_two" bindtap="faPiaoJiLu">
+    <view>开票记录</view>
+    <image src="../images/rihgt.png"></image>
+</view>
+</view>
+<!-- 优惠 -->
+<view class="my_hui">
+<view class="my_ding_one" bindtap="you">
+    <view>优惠买单</view>
+    <image src="../images/rihgt.png"></image>
+</view>
+<view class="my_ding_one" bindtap="yu">
+    <view>资金明细</view>
+    <image src="../images/rihgt.png"></image>
+</view>
+<view class="my_ding_one" bindtap="qianDao">
+    <view>每日签到</view>
+    <image src="../images/rihgt.png"></image>
+</view>
+<view class="my_ding_one" bindtap="jiFenDuiHuan">
+    <view>积分兑换</view>
+    <image src="../images/rihgt.png"></image>
+</view>
+<view class="my_ding_one">
+    <view>收货地址</view>
+    <image src="../images/rihgt.png"></image>
+</view>
+<view class="my_ding_one my_kai_two" bindtap="linJuan">
+    <view>领劵中心</view>
+    <image src="../images/rihgt.png"></image>
+</view>
+</view>
+<!-- 关于我们 -->
+<view class="my_guan">
+<view class="my_ding_one" bindtap="guanYu">
+    <view>关于我们</view>
+    <image src="../images/rihgt.png"></image>
+</view>
+<view class="my_ding_one my_guan_one">
+    <view>绑定手机</view>
+    <button size="mini">立即绑定</button>
+</view>
+<view class="my_ding_one my_kai_two">
+    <button bindtap="login" wx:if="{{!isHide}}">授权登录</button>
+    <button bindtap="login" wx:if="{{isHide}}">退出登录</button>
+    <image src="../images/rihgt.png"></image>
+</view>
+</view>
+<!-- 授权登录模态框 -->
+<view class="moTai" wx:if="{{isHide}}">
+  <view class="moTai_one">
+    <view class="moTai_two">
+      <image src="../images/deng.png"></image>
+      <text>授权登录</text>
+    </view>
+    <view class="moTai_three">· 请授权小程序登录</view>
+    <view class="moTai_three moTai_four">· 我们不会公布您的这些信息</view>
+    <view class="moTai_three moTai_five">· 只是为了给您提供更好的服务</view>
+    <button  class="moTai_button">允许</button>
+    <button class="moTai_button_one" bindtap="stop">暂不登录</button>
+  </view>
+</view>
+<!-- 最后 -->
+<view class="my_end">Powered by EastWorld v 7.6.1</view>
+<!-- 页面整体布局结束 -->
+</view>

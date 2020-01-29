@@ -1,0 +1,264 @@
+<!--pages/xiangQin/xiangQin.wxml-->
+<!-- 商品详情页面布局 -->
+<view class="xiangQin">
+  <!-- 头部布局 -->
+  <view wx:for="{{list}}" class="xiangQin_head">
+    <image src="{{item.pic}}" class="xiangQin_head_image"></image>
+    <view class="xiangQin_head_one">
+      <view>{{item.name}}</view>
+      <view class="xiangQin_head_two">
+        <view>￥{{item.minPrice}}
+          <text>{{item.numberOrders}}人已买</text>
+        </view>
+        <view class="xiangQin_head_three">
+          <button open-type="share">
+            <image src="../images/z.png"></image>
+          </button>
+          <button bindtap="hai">
+            <image src="../images/zz.png"></image>
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 商品平团 -->
+  <view wx:if="{{pingTuan}}" class="xiangQin_kanJia">
+    <view>商品拼团设置</view>
+    <view class="xiangQin_kanJia_one">
+      <view>已成团</view>
+      <view>0</view>
+    </view>
+    <view class="xiangQin_kanJia_one">
+      <view>成团人数</view>
+      <view>5</view>
+    </view>
+    <view class="xiangQin_kanJia_one">
+      <view>退款条件</view>
+      <view>8小时未成团</view>
+    </view>
+    <view class="xiangQin_kanJia_one">
+      <view>截止</view>
+      <view>2019-12-31 00:00:00</view>
+    </view>
+  </view>
+  <!-- 商品砍价 -->
+  <view wx:if="{{kanJia}}" class="xiangQin_kanJia">
+    <view>商品砍价设置</view>
+    <view class="xiangQin_kanJia_one">
+      <view>限量</view>
+      <view>676500份</view>
+    </view>
+    <view class="xiangQin_kanJia_one">
+      <view>已售</view>
+      <view>58份</view>
+    </view>
+    <view class="xiangQin_kanJia_one">
+      <view>原价</view>
+      <view>￥100</view>
+    </view>
+    <view class="xiangQin_kanJia_one">
+      <view>底价</view>
+      <view>￥80</view>
+    </view>
+    <view class="xiangQin_kanJia_one">
+      <view>截止</view>
+      <view>2222-05-01 12:00:00</view>
+    </view>
+      <view class="xiangQin_kanJia_one ">帮Ta砍价吧！</view>
+      <view class="xiangQin_kanJia_one xiangQin_kanJia_two">
+        <view>邀请朋友帮忙</view>
+        <view>砍价</view>
+      </view>
+       <view class="xiangQin_kanJia_one">
+      <view >帮砍人数</view>
+      <view>2</view>
+    </view>
+     <view class="xiangQin_kanJia_one">
+      <view>状态</view>
+      <view>进行中</view>
+    </view>
+     <view class="xiangQin_kanJia_one">
+      <view>报名时间</view>
+      <view>￥2020-01-21 15:45:24</view>
+    </view>
+  
+  </view>
+  <!-- 选择 -->
+  <view class="xiangQin_xuan" bindtap="gou" wx:if="{{!kanJia}}">
+    <view>选择：花色 颜色</view>
+    <image src="../images/rihgt.png"></image>
+  </view>
+  <!-- 商品介绍 -->
+  <view class="xiangQin_jieShao">
+    <image src="../images/pin_one.jpg" wx:if="{{flg}}"></image>
+    <image src="../images/pin_two.jpg" wx:if="{{flg_one}}" style="height:1400px;"></image>
+    <image src="../images/pin_three.jpg" wx:if="{{flg_two}}"></image>
+    <image src="../images/pin_four.jpg" wx:if="{{flg_three}}"></image>
+    <image src="../images/pin_five.jpg" wx:if="{{flg_four}}"></image>
+  </view>
+  <!-- 底部固定导航 -->
+  <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
+    <image src="../images/ll.png"></image>
+    <view>快速导航</view>
+  </view>
+  <view class="zi_bottom_one" wx:if="{{show}}" bindtap="show">
+    <view class="zi_bottom_one_nav">
+      <image src="../images/rl.png"></image>
+      <text>快速导航</text>
+    </view>
+    <view class="zi_bottom_two">
+      <view class="zi_bottom_two_dd" bindtap="index">
+        <image src="../images/show.png"></image>
+        <text>首页</text>
+      </view>
+      <view class="zi_bottom_two_dd" bindtap="fen">
+        <image src="../images/fen_one.png"></image>
+        <text>分类</text>
+      </view>
+      <view class="zi_bottom_two_dd" bindtap="shop">
+        <image src="../images/shop_one.png"></image>
+        <text>购物车</text>
+      </view>
+      <view class="zi_bottom_two_dd" bindtap="my">
+        <image src="../images/my.png"></image>
+        <text>我的</text>
+      </view>
+    </view>
+
+  </view>
+
+    <!-- 用当前的价格买 -->
+    <view bindtap="gou_one" wx:if="{{kanJia}}" class="dd">用当前的价格买</view>
+    <!-- 平团 -->
+     <!-- 底部固定导航 -->
+  <view class="xiangQin_fiex" wx:if="{{shop_one}}" wx:if="{{pingTuan}}">
+    <view class="xiangQin_fiex_one">
+      <view class="xiangQin_fiex_two">
+        <image src="../images/ke.png"></image>
+        <view>客服</view>
+      </view>
+      <view class="xiangQin_fiex_two" bindtap="shop">
+        <image src="../images/shop_one.png"></image>
+        <view>购物车</view>
+      </view>
+    </view>
+    <view class="xiangQin_fiex_three" bindtap="gou">单独购买</view>
+    <view class="xiangQin_fiex_four" bindtap="gou_one">发起拼团</view>
+  </view>
+
+  <!-- 底部固定导航 -->
+  <view class="xiangQin_fiex" wx:if="{{!kanJia}}" wx:if="{{!pingTuan}}">
+    <view class="xiangQin_fiex_one">
+      <view class="xiangQin_fiex_two">
+        <image src="../images/ke.png"></image>
+        <view>客服</view>
+      </view>
+      <view class="xiangQin_fiex_two" bindtap="shop">
+        <image src="../images/shop_one.png"></image>
+        <view>购物车</view>
+      </view>
+    </view>
+    <view class="xiangQin_fiex_three" bindtap="gou">加入购物车</view>
+    <view class="xiangQin_fiex_four" bindtap="gou_one">立即购买</view>
+  </view>
+
+  <!-- 点击生成海报 -->
+  <view wx:if="{{hai}}" class="xiangQin_haiBao">
+
+    <view wx:for="{{list}}" class="xiangQin_haiBao_one">
+      <image src="{{item.pic}}"></image>
+      <view>{{item.name}}</view>
+      <view class="xiangQin_haiBao_two">￥{{item.minPrice}}</view>
+      <image src="https://i.loli.net/2020/01/23/JeoYcjRgyLUAZ1O.jpg" class="xiangQin_haiBao_three"></image>
+      <view class="xiangQin_haiBao_four">长按小程序码查看详情</view>
+    </view>
+    <view class="xiangQin_haiBao_five">
+      <button>保存图片</button>
+      <button bindtap="hai_bi">关闭</button>
+    </view>
+  </view>
+
+  <!-- 点击购物车显示页面 -->
+  <view class="xinagQing_shop" wx:if="{{shop}}">
+
+    <view class="xinagQing_shop_one">
+
+      <view wx:for="{{list}}" class="xinagQing_shop_one_head">
+        <image src="{{item.pic}}"></image>
+        <view class="xinagQing_shop_one_right">
+          <view>{{item.name}}</view>
+          <view>{{item.minPrice}}</view>
+        </view>
+      </view>
+      <view class="xinagQing_shop_two">
+        <view>花色</view>
+        <view>
+          <text class="{{num==0?'aa':''}}" data-current = "0" bindtap="check" data-text="粉色叶子">粉色叶子</text>
+          <text class="{{num==1?'aa':''}}" data-current = "1" bindtap="check" data-text="淡灰小船">淡灰小船</text>
+        </view>
+      </view>
+      <view class="xinagQing_shop_two xinagQing_shop_three">
+        <view>颜色</view>
+        <view>
+          <text class="{{num_one==0?'aa':''}}" data-current = "0" bindtap="check_one" data-text_one="红色">红色</text>
+          <text class="{{num_one==1?'aa':''}}" data-current = "1" bindtap="check_one" data-text_one="黄色">黄色</text>
+          <text class="{{num_one==2?'aa':''}}" data-current = "2" bindtap="check_one" data-text_one="蓝色">蓝色</text>
+        </view>
+      </view>
+      <view class="xinagQing_shop_four">
+        <view>购买数量</view>
+        <view class="xinagQing_shop_five">
+          <button bindtap="jian" class="{{background}}">-</button>
+          <input value="{{shu}}" bindinput="huo"></input>
+          <button bindtap="jia">+</button>
+        </view>
+      </view>
+      <view class="xinagQing_shop_six" bindtap="jiaRu">加入购物车</view>
+    </view>
+    <icon type="cancel" class="xinagQing_shop_seven" bindtap="hidd"></icon>
+
+  </view>
+
+ <!-- 点击立即购买显示页面 -->
+  <view class="xinagQing_shop" wx:if="{{shop_one}}">
+
+    <view class="xinagQing_shop_one">
+
+      <view wx:for="{{list}}" class="xinagQing_shop_one_head">
+        <image src="{{item.pic}}"></image>
+        <view class="xinagQing_shop_one_right">
+          <view>{{item.name}}</view>
+          <view>{{item.minPrice}}</view>
+        </view>
+      </view>
+      <view class="xinagQing_shop_two">
+        <view>花色</view>
+        <view>
+          <text class="{{num==0?'aa':''}}" data-current = "0" bindtap="check" data-text="粉色叶子">粉色叶子</text>
+          <text class="{{num==1?'aa':''}}" data-current = "1" bindtap="check" data-text="淡灰小船">淡灰小船</text>
+        </view>
+      </view>
+      <view class="xinagQing_shop_two xinagQing_shop_three">
+        <view>颜色</view>
+        <view>
+          <text class="{{num_one==0?'aa':''}}" data-current = "0" bindtap="check_one" data-text_one="红色">红色</text>
+          <text class="{{num_one==1?'aa':''}}" data-current = "1" bindtap="check_one" data-text_one="黄色">黄色</text>
+          <text class="{{num_one==2?'aa':''}}" data-current = "2" bindtap="check_one" data-text_one="蓝色">蓝色</text>
+        </view>
+      </view>
+      <view class="xinagQing_shop_four">
+        <view>购买数量</view>
+        <view class="xinagQing_shop_five">
+          <button bindtap="jian" class="{{background}}">-</button>
+          <input value="{{shu}}" bindinput="huo"></input>
+          <button bindtap="jia">+</button>
+        </view>
+      </view>
+      <view class="xinagQing_shop_six" bindtap="mai">立即购买</view>
+    </view>
+    <icon type="cancel" class="xinagQing_shop_seven" bindtap="hidd"></icon>
+
+  </view>
+
+  <!-- 结束 -->
+</view>

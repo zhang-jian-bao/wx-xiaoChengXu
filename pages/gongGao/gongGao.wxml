@@ -1,0 +1,21 @@
+<!--pages/gongGao/gongGao.wxml-->
+<!-- 公告页面 -->
+<view class="gongGao">
+<!-- 内容布局 -->
+  <view class="gongGao_con">
+   <view class="gongGao_con_one">
+     <view class="gongGao_con_one_one">
+      <view>定制您的专属小程序商城</view>
+      <view>2020-01-26 19:01:27</view>
+    </view>
+    <view class="gongGao_con_one_two">查看 > </view>
+   </view>
+    <view class="gongGao_con_one">
+       <view class="gongGao_con_one_one">
+      <view>商城新开张，优惠多多，戳 戳 戳 我看详情</view>
+      <view>2020-01-26 19:01:27</view>
+    </view>
+    <view class="gongGao_con_one_two">查看 > </view>
+  </view>
+  </view>
+</view>

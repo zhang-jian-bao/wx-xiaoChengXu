@@ -1,0 +1,50 @@
+<!--pages/youHui/youHui.wxml-->
+<!-- 优惠买单页面 -->
+<view class="youHui">
+<!-- 消费金额 -->
+  <view class="youHui_one">
+    <view>消费金额</view>
+    <input type="text" placeholder="请询问服务员后输入"></input>
+  </view>
+  <!-- 优惠券 -->
+  <view class="youHui_two">
+    <view>消费满10000元减500元</view>
+    <view>消费满2000元减300元</view>
+    <view>消费满1000元减150元</view>
+    <view>消费满500元减60元</view>
+    <view>消费满200元减22元</view>
+    <view>消费满100元减10元</view>
+  </view>
+    <button class="youHui_three">确认支付</button>
+    <!-- 底部固定导航 -->
+  <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
+    <image src="../images/ll.png"></image>
+    <view>快速导航</view>
+  </view>
+  <view class="zi_bottom_one" wx:if="{{show}}" bindtap="show">
+    <view class="zi_bottom_one_nav">
+      <image src="../images/rl.png"></image>
+      <text>快速导航</text>
+    </view>
+    <view class="zi_bottom_two">
+       <view class="zi_bottom_two_dd" bindtap="index">
+      <image src="../images/show.png"></image>
+      <text>首页</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="fen">
+      <image src="../images/fen_one.png"></image>
+      <text>分类</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="shop">
+      <image src="../images/shop_one.png"></image>
+      <text>购物车</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="my">
+      <image src="../images/my.png"></image>
+      <text>我的</text>
+    </view>
+    </view>
+
+  </view>
+
+</view>

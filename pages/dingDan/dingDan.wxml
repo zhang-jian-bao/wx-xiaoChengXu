@@ -1,0 +1,54 @@
+<!--pages/dingDan/dingDan.wxml-->
+<!-- 订单列表页面布局开始 -->
+<view class="dingDan">
+<!--导航 开始-->
+    <view class="zi_nav">
+    <view class="{{num==0?'active':''}}" data-current = "0" bindtap="check">待付款</view>
+    <view class="{{num==1?'active':''}}" data-current = "1" bindtap="check">代发货</view>
+    <view class="{{num==2?'active':''}}" data-current = "2" bindtap="check">待收货</view>
+    <view class="{{num==3?'active':''}}" data-current = "3" bindtap="check">待评价</view>
+    <view class="{{num==4?'active':''}}" data-current = "4" bindtap="check">已完成</view>
+    <!-- 导航结束 -->
+  </view>
+  <!-- <view class="zi_xuan"> -->
+  <!-- 选项卡 -->
+  <swiper current="{{num}}" class='swiper' style="height:100%; background:#eee;" duration="200" bindchange="bindchange">
+  <swiper-item><image src="../images/ding.png" class="dingDan_image"></image><view class='swiper_con'>暂无订单</view></swiper-item> 
+  <swiper-item><image src="../images/ding.png" class="dingDan_image"></image><view class='swiper_con'>暂无订单~</view></swiper-item>
+  <swiper-item><image src="../images/ding.png" class="dingDan_image"></image><view class='swiper_con'>暂无订单</view></swiper-item>  
+   <swiper-item><image src="../images/ding.png" class="dingDan_image"></image><view class='swiper_con'>暂无订单~</view></swiper-item>
+  <swiper-item><image src="../images/ding.png" class="dingDan_image"></image><view class='swiper_con'>暂无订单</view></swiper-item>
+</swiper>
+
+ <!-- 底部固定导航 -->
+  <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
+    <image src="../images/ll.png"></image>
+    <view>快速导航</view>
+  </view>
+  <view class="zi_bottom_one" wx:if="{{show}}" bindtap="show">
+    <view class="zi_bottom_one_nav">
+      <image src="../images/rl.png"></image>
+      <text>快速导航</text>
+    </view>
+    <view class="zi_bottom_two">
+       <view class="zi_bottom_two_dd" bindtap="index">
+      <image src="../images/show.png"></image>
+      <text>首页</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="fen">
+      <image src="../images/fen_one.png"></image>
+      <text>分类</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="shop">
+      <image src="../images/shop_one.png"></image>
+      <text>购物车</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="my">
+      <image src="../images/my.png"></image>
+      <text>我的</text>
+    </view>
+    </view>
+
+  </view>
+
+</view>

@@ -1,0 +1,63 @@
+<!--pages/faPiao/faPiao.wxml-->
+<!-- 发票申请页面 -->
+<view class="faPiao">
+<!-- 内容页面布局 -->
+  <view class="faPiao_con">
+    <view>开票信息</view>
+    <view class="faPiao_con_one">
+      <view>名称</view>
+      <input type="text" placeholder="请填写公司名称"></input>
+    </view>
+    <view class="faPiao_con_one">
+      <view>税号</view>
+      <input type="text" placeholder="请填写开票税号"></input>
+    </view>
+    <view class="faPiao_con_one">
+      <view>发票内容</view>
+      <view class="faPiao_con_two">服务费</view>
+    </view>
+     <view class="faPiao_con_one">
+      <view>工厂账号</view>
+      <input type="text" placeholder="工厂注册的手机号码"></input>
+    </view>
+     <view class="faPiao_con_one">
+      <view>开票金额</view>
+      <input type="text" placeholder="0.00"></input>
+    </view>
+    <view class="faPiao_con_three">快递地址</view>
+    <textarea placeholder="请填写快递地址" class="faPiao_con_four"></textarea>
+    <button class="faPiao_con_button">申请开票</button>
+  </view>
+  <!-- 底部固定导航 -->
+  <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
+    <image src="../images/ll.png"></image>
+    <view>快速导航</view>
+  </view>
+  <view class="zi_bottom_one" wx:if="{{show}}" bindtap="show">
+    <view class="zi_bottom_one_nav">
+      <image src="../images/rl.png"></image>
+      <text>快速导航</text>
+    </view>
+    <view class="zi_bottom_two">
+       <view class="zi_bottom_two_dd" bindtap="index">
+      <image src="../images/show.png"></image>
+      <text>首页</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="fen">
+      <image src="../images/fen_one.png"></image>
+      <text>分类</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="shop">
+      <image src="../images/shop_one.png"></image>
+      <text>购物车</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="my">
+      <image src="../images/my.png"></image>
+      <text>我的</text>
+    </view>
+    </view>
+
+  </view>
+
+
+</view>

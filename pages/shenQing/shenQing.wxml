@@ -1,0 +1,58 @@
+<!--pages/shenQing/shenQing.wxml-->
+<!-- 申请成为分销商页面 -->
+<view class="shenQing">
+<!-- 图片 -->
+  <image src="../images/fen_two.jpg"></image>
+  <!-- 内容 -->
+  <view class="shenQing_con">
+    <view>请填写申请信息</view>
+    <view class="shenQing_con_one">邀请人 <text>翟宏伟（请确认）</text></view>
+    <view class="shenQing_con_two">
+      <view class="shenQing_con_two_one">
+        <view>姓名</view>
+        <text>*</text>
+      </view>
+       <input type="text" placeholder="请输入真实姓名"></input>
+    </view>
+    <view class="shenQing_con_two">
+       <view  class="shenQing_con_two_one">
+        <view>手机</view>
+        <text>*</text>
+      </view>
+       <input type="text" placeholder="请输入手机号码"></input>
+    </view>
+    <view class="shenQing_con_three">成为分销商后卖出商品，您可以获得佣金</view>
+    <button>申请成为分销商</button>
+  </view>
+    <!-- 底部固定导航 -->
+  <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
+    <image src="../images/ll.png"></image>
+    <view>快速导航</view>
+  </view>
+  <view class="zi_bottom_one" wx:if="{{show}}" bindtap="show">
+    <view class="zi_bottom_one_nav">
+      <image src="../images/rl.png"></image>
+      <text>快速导航</text>
+    </view>
+    <view class="zi_bottom_two">
+       <view class="zi_bottom_two_dd" bindtap="index">
+      <image src="../images/show.png"></image>
+      <text>首页</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="fen">
+      <image src="../images/fen_one.png"></image>
+      <text>分类</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="shop">
+      <image src="../images/shop_one.png"></image>
+      <text>购物车</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="my">
+      <image src="../images/my.png"></image>
+      <text>我的</text>
+    </view>
+    </view>
+
+  </view>
+
+</view>

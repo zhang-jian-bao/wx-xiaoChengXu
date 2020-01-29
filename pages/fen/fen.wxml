@@ -1,0 +1,45 @@
+<!--pages/fen/fen.wxml-->
+
+<view class="fen">
+<!-- 分类页面开始 -->
+  <view class="fen_search">
+  <!-- 搜索 -->
+    <input type="search" placeholder="输入搜索关键词" value="{{searchValue}}" bindinput="searchValueInput" bindconfirm="huiChe"></input>
+    <icon type="search"></icon>
+  </view>
+  <view class="fen_con">
+    <view class="fen_left">
+     <!-- 左边导航栏布局开始 -->
+     <view wx:for="{{list}}">
+      <view bindtap="dianJi" data-index="{{index}}" data-item="{{item}}"
+      class="fen_left_one {{num==index?'active':''}}">{{item.name}}</view>
+     </view>
+     
+         <!-- 左边导航栏布局结束 -->
+    </view>
+    <view class="fen_right">
+      <!-- 右边导航栏布局开始 -->
+      <!-- <scroll-view scroll-y style="height: 400rpx;"> -->
+      <view  wx:for="{{list_one}}" class="fen_right_one" wx:if="{{shop}}"
+      bindtap="right" data-item="{{item}}">
+     
+       <image src="{{item.pic}}"></image>
+      <view class="fen_right_two">
+        <view>{{item.name}}</view>
+        <view>￥{{item.minPrice}}</view>
+        <view class="fen_right_three">
+          <view>已售{{item.minPrice}}件</view>
+        <view>评价{{item.numberSells}}分</view>
+        </view>
+      </view>
+       </view>
+     <!-- </scroll-view> -->
+     <view wx:if="{{!shop}}">————暂无数据————</view>
+      <!-- 右边导航栏布局结束 -->
+    </view>
+  
+  </view>
+
+
+<!-- 分类页面结束 -->
+</view>

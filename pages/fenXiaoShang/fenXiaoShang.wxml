@@ -1,0 +1,42 @@
+<!--pages/fenXiaoShang/fenXiaoShang.wxml-->
+<!-- 分销商页面 -->
+<view class="fenXiaoShang">
+
+  <!-- 内容页面布局 -->
+  <view class="fenXiaoShang_con">
+    <image src="../images/fenXiaoShang.png"></image>
+    <view>您还不是分销商，无法使用分销功能</view>
+    <button bindtap="shenQing">申请开通</button>
+  </view> 
+   <!-- 底部固定导航 -->
+  <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
+    <image src="../images/ll.png"></image>
+    <view>快速导航</view>
+  </view>
+  <view class="zi_bottom_one" wx:if="{{show}}" bindtap="show">
+    <view class="zi_bottom_one_nav">
+      <image src="../images/rl.png"></image>
+      <text>快速导航</text>
+    </view>
+    <view class="zi_bottom_two">
+       <view class="zi_bottom_two_dd" bindtap="index">
+      <image src="../images/show.png"></image>
+      <text>首页</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="fen">
+      <image src="../images/fen_one.png"></image>
+      <text>分类</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="shop">
+      <image src="../images/shop_one.png"></image>
+      <text>购物车</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="my">
+      <image src="../images/my.png"></image>
+      <text>我的</text>
+    </view>
+    </view>
+
+  </view>
+
+</view>

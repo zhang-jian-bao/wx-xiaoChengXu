@@ -1,0 +1,193 @@
+/* 整体布局 */
+.my{
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  position: relative;
+}
+/* 登录布局 */
+.my_deng{
+  width: 100%;
+  height: auto;
+  text-align: center;
+   border-bottom: 1px solid #eee;
+   background: #fff;
+}
+.my_deng>image{
+  width: 80px;
+  height: 80px;
+}
+.my_deng>view{
+  font-size: 14px;
+  width: 100px;
+  height: 30px;
+  padding: 0 10px;
+  line-height: 30px;
+   border: 1px solid #000;
+  border-radius:4px; 
+  margin: 0 auto 20px;
+}
+/*余额 */
+.my_yu{
+  width: 100%;
+  height: 80px;
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  background: #fff;
+}
+.my_yu_one{
+  width: 33%;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+}
+/* 订单 */
+.my_ding{
+  margin-top: 4px;
+  background: #fff;
+  width: 100%;
+  height: 100px;
+}
+.my_ding_one{
+  height: 40px;
+  padding: 0 10px;
+  line-height: 40px;
+  display: flex;
+  border-bottom: 1px solid #eee;
+  justify-content: space-between;
+  align-items: center;
+}
+.my_ding_one>image{
+  width: 20px;
+  height: 20px;
+}
+.my_ding_two{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+.my_ding_three{
+  width: 20%;
+}
+.my_ding_three>image{
+  width: 20px;
+  height: 20px;
+}
+.my_ding_three>view{
+  font-size: 12px;
+}
+/* api广告 */
+.cha,.cha>image{
+  width: 100%;
+  height: 100px;
+}
+/* 分销商 */
+.my_fen{
+background: #fff;
+margin: 4px 0;
+}
+/* 开票 */
+.my_kai{
+  height: 80px;
+  background: #fff;
+}
+.my_kai_two{
+  border: none;
+}
+.my_kai_two>button{
+  margin: 0 ;
+  padding: 0;
+  background: #fff;
+  width:auto;
+  height: 40px;
+  font-weight: normal;
+  line-height: 40px;
+}
+/* 优惠 */
+.my_hui{
+  background: #fff;
+  height: 240px;
+  margin-top: 4px;
+}
+/* 关于 */
+.my_guan{
+  background: #fff;
+  margin-top: 4px;
+}
+.my_guan_one>button{
+  margin: 0;
+  background: greenyellow;
+  color: #fff;
+}
+/* 结束 */
+.my_end{
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  background: #fff;
+  margin: 4px 0;
+}
+/* 点击授权登录 模态框布局*/
+.moTai{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.5);
+}
+.moTai_one{
+  position: fixed;
+  top: 25%;
+  left: 12%;
+  /* right: auto; */
+  width: 70%;
+  height: auto;
+  border-radius: 4px;
+  background: #fff;
+  /* margin: 50% auto; */
+  padding: 10px;
+}
+.moTai_two{
+  width: 100%;
+  height:auto;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+.moTai_two>image{
+  width: 60px;
+  height: 60px;
+}
+.moTai_two>text{
+  display: block;
+  margin-bottom: 4px;
+}
+.moTai_three{
+  height: 25px;
+  line-height: 25px;
+  width: 100%;
+  text-indent: 35px;
+  font-size: 12px;
+}
+.moTai_four{
+    text-indent: 25px;
+}
+.moTai_five{
+  text-indent: 22px;
+}
+.moTai_button{
+  background:greenyellow;
+  color: #fff;
+  margin-bottom: 10px; 
+}
+.moTai_button_one{
+  background: #eee;
+  color: #000;
+}

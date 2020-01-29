@@ -1,0 +1,229 @@
+/* pages/shangPin/shangPin.wxss */
+/* 整体 */
+.shangPin{
+  width: 100%;
+  height: 100%;
+  background: #eee;
+}
+page{
+  height: 100%;
+}
+/* 头部搜索框 */
+.shangPin_head{
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+.shangPin_head_search{
+  width: 85%;
+  height: 30px;
+  display: flex;
+  line-height: 30px;
+  border: 1px solid #eee;
+  position: relative;
+  border-radius: 16px;
+}
+.shangPin_head_search>input{
+  height: 30px;
+  width: 60%;
+  padding-left: 20px;
+}
+.shangPin_head_search>icon{
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+.shangPin_head>image{
+  width: 20px;
+  height: 20px;
+}
+/* 导航 */
+.zi_nav{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border-top:1px solid #eee; 
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  background: #fff;
+}
+.zi_nav>view{
+  width:33%;
+  height: 40px;
+  text-align: center;
+  font-size: 16px;
+}
+.zi_xuan{
+  width: 100%;
+  height: 100%;
+}
+.active{
+  color: red;
+}
+.swiper_con,.swiper_com{
+   height: auto;
+   font-size: 12px;
+   background: #eee;
+   padding: 10px 10px;
+}
+.swiper_con_one{
+  width: 100%;
+  height: auto;
+  /* border: 1px solid #000; */
+  display: flex;
+  justify-content: space-between; 
+  margin-top: 6px;
+  background: #fff;
+  border-radius:6px;
+}
+.swiper_con_two>image{
+  width: 60px;
+  height: 100%;
+  border-radius:6px 0 0 6px;
+}
+.swiper_con_three{
+  width: 70%;
+  height: auto;
+  /* border: 1px solid #000; */
+  padding: 6px 10px;
+}
+.swiper_con_three>view:nth-child(1){
+  width: 100%;
+  line-height:20px;
+}
+.swiper_con_three>view:nth-child(2){
+  color: red;
+}
+.swiper_con_three>view:nth-child(3){
+ font-size: 10px;
+ color: #eee;
+ margin-top: 6px;
+ margin-bottom: 6px;
+}
+.swiper_con_three>view:nth-child(3)>image{
+  width:15px;
+  height: 15px; 
+  float: right;
+  font-weight: bold;
+}
+/* 变换的样式 */
+.swiper_com{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+}
+.swiper_con_one_two{
+  width: 48%;
+  height: auto;
+  /* border: 1px solid #000; */
+  margin-top: 6px;
+  border-radius: 6px;
+  background: #fff;
+}
+.swiper_con_two_two>image{
+  width: 100%;
+  height: 100px;
+  border-radius: 6px 6px 0 0;
+}
+.swiper_con_three_two{
+  padding: 4px 10px;
+  background: #fff;
+    border-radius:0 0 6px 6px;
+}
+.swiper_con_three_two>view:nth-child(2){
+  color: red;
+}
+.swiper_con_three_two>view:nth-child(3){
+   font-size: 10px;
+   color: #eee;
+   margin-top: 6px;
+   margin-bottom: 6px;
+}
+.swiper_con_three_two>view:nth-child(3)>image{
+  width:15px;
+  height: 15px; 
+  float: right;
+  font-weight: bold;
+}
+/* 固定导航 */
+.zi_bottom{
+  position: fixed;
+  right: 0;
+  bottom: 40px;
+  width: 60px;
+  height: 40px;
+  border-radius: 6px 0 0 6px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.zi_bottom>image{
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.zi_bottom>view{
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+}
+/* 出来的那个导航 */
+.zi_bottom_one{
+  position:fixed;
+  bottom: 40px;
+  right: 0;
+  width: 80%;
+  height: 40px;
+  /* border: 1px solid #000; */
+  display: flex;
+}
+.zi_bottom_one_nav{
+  width: 60px;
+  height: 40px;
+  border-radius: 6px 0 0 6px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.zi_bottom_one_nav>image{
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.zi_bottom_one_nav>text{
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+  display: block;
+}
+.zi_bottom_two{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+}
+.zi_bottom_two_dd{
+  width: 25%;
+  text-align: center;
+}
+.zi_bottom_two_dd>image{
+  width: 20px;
+  height: 20px;
+}
+.zi_bottom_two_dd>text{
+  display: block;
+  font-size: 12px;
+}
+

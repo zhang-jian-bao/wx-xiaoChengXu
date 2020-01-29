@@ -1,0 +1,16 @@
+<!--pages/shop/shop.wxml-->
+<view class="box_shop">
+
+  <view class="shop_shop">
+    <image src="../images/shop_one.png"></image>
+    <view>购物车空空如也~</view>
+    <button>去逛逛</button>
+  </view>
+
+  <view class="cha">
+<!-- 插入广告 -->
+  <image src="../images/api_one.jpg"></image>
+</view>
+
+</view>
+

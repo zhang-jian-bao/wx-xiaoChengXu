@@ -1,0 +1,108 @@
+/* pages/fen/fen.wxss */
+/* 整体 */
+.fen{
+  width: 100%;
+  height: 100%;
+}
+/* 搜索框 */
+.fen_search{
+  display: flex;
+  width: 90%;
+  height: 30px;
+  border: 1px solid #000;
+  padding-left: 10px;
+  border-radius: 16px; 
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px auto;
+
+}
+.fen_search>input{
+  height: 30px;
+}
+.fen_search>icon{
+
+  margin-right: 10px;
+}
+/* 内容区域 */
+.fen_con{
+  width: 100%;
+  height:auto;
+  /* border: 1px solid #000;  */
+  background: #eee;
+  display: flex;
+  background: #fff;
+}
+.fen_left{
+  width: 30%;
+  height:100%;
+  /* border: 1px solid #000;  */
+  font-size: 13px;
+  text-align: center;
+}
+.fen_left_one{
+  /* margin: 10px 0; */
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+.active{
+  color: red;
+  font-weight: bold;
+  border-left: 1px solid red;
+}
+.fen_right{
+  width: 70%;
+  height: 400px;
+  overflow-y: scroll;
+}
+.fen_right_one{
+  display: flex;
+  width: 90%;
+  height:70px;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  font-size: 12px;
+}
+.fen_right_one>image{
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+.fen_right_two{
+  width: 140px;
+  height: auto;
+  /* border: 1px solid #000; */
+}
+.fen_right_two>view:nth-child(1){
+  font-size: 14px;
+  font-weight: bold;
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.fen_right_two>view:nth-child(2){
+  font-weight: bold;
+  color: red;
+  margin: 4px 0;
+}
+.fen_right_three{
+  display: flex;
+  font-size: 12px;
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  justify-content: space-between;
+}
+.fen_right_three>view:nth-child(1){
+  color: red;
+  width: auto;
+  height: 20px;
+  border: 1px solid red;
+  padding: 0 4px;
+  /* line-height: 20px; */
+}
+

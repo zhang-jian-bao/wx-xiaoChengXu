@@ -1,0 +1,38 @@
+/* pages/shop/shop.wxss */
+.box_shop{
+  width: 100%;
+  height: 100%;
+  position: relative;
+   background: #eee;
+}
+/* 内容区域布局 */
+.shop_shop{
+  width: 100%;
+  height:100%;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #eee;
+}
+.shop_shop>image{
+  width: 80px;
+  height: 80px;
+  margin-top: 60px;
+}
+.shop_shop>view{
+  color: #ccc;
+  margin: 20px 0;
+}
+.shop_shop>button{
+  background: red;
+  color: #fff;
+}
+/* api广告 */
+.cha,.cha>image{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+}

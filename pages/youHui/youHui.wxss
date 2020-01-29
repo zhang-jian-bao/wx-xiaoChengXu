@@ -1,0 +1,124 @@
+/* pages/youHui/youHui.wxss */
+/* 整体布局 */
+.youHui{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+page{
+  height: 100%;
+}
+/* 消费金额 */
+.youHui_one{
+  height: 40px;
+  padding: 0 20px;
+  font-size: 14px;
+  line-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.youHui_one>input{
+  height: 40px;
+}
+.youHui_two{
+  height: 100px;
+  padding: 0 20px;
+  font-size: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: space-around;
+  margin: 10px 0 20px;
+}
+.youHui_two>view{
+  width: 25%;
+  height: 40px;
+  line-height: 20px;
+  /* letter-spacing: 2px; */
+  padding: 0 2px;
+  border: 1px solid greenyellow;
+  color: greenyellow;
+}
+/* 点击支付 */
+.youHui_three{
+  background: green;
+  color: #fff;
+}
+/* 固定导航 */
+.zi_bottom{
+  position: fixed;
+  right: 0;
+  bottom: 40px;
+  width: 60px;
+  height: 40px;
+  border-radius: 6px 0 0 6px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.zi_bottom>image{
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.zi_bottom>view{
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+}
+/* 出来的那个导航 */
+.zi_bottom_one{
+  position:fixed;
+  bottom: 40px;
+  right: 0;
+  width: 80%;
+  height: 40px;
+  /* border: 1px solid #000; */
+  display: flex;
+}
+.zi_bottom_one_nav{
+  width: 60px;
+  height: 40px;
+  border-radius: 6px 0 0 6px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.zi_bottom_one_nav>image{
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.zi_bottom_one_nav>text{
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+  display: block;
+}
+.zi_bottom_two{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+.zi_bottom_two_dd{
+  width: 25%;
+  text-align: center;
+}
+.zi_bottom_two_dd>image{
+  width: 20px;
+  height: 20px;
+}
+.zi_bottom_two_dd>text{
+  display: block;
+  font-size: 12px;
+}
+

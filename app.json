@@ -1,0 +1,68 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/fen/fen",
+    "pages/shop/shop",
+    "pages/my/my",
+    "pages/zi/zi",
+    "pages/jiFen/jiFen",
+    "pages/dingDan/dingDan",
+    "pages/tui/tui",
+    "pages/fenXiaoShang/fenXiaoShang",
+    "pages/shenQing/shenQing",
+    "pages/faPiao/faPiao",
+    "pages/faPiaoJiLu/faPiaoJiLu",
+    "pages/youHui/youHui",
+    "pages/qianDao/qianDao",
+    "pages/jiFenDuiHuan/jiFenDuiHuan",
+    "pages/linJuan/linJuan",
+    "pages/shangPin/shangPin",
+    "pages/gongGao/gongGao",
+    "pages/xiangQin/xiangQin",
+    "pages/queRenDingDan/queRenDingDan"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "天使童装",
+    "navigationBarTextStyle": "black",
+    "pageOrientation": "auto",
+    "backgroundColor": "#ffc"
+  },
+  "style": "v2",
+  "tabBar": {
+    "color": "#ccc",
+    "selectedColor": "#ff3300",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "pages/images/show.png",
+        "selectedIconPath": "pages/images/show_one.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/fen/fen",
+        "iconPath": "pages/images/fen_one.png",
+        "selectedIconPath": "pages/images/fen.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/shop/shop",
+        "iconPath": "pages/images/shop_one.png",
+        "selectedIconPath": "pages/images/shop.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "pages/images/my.png",
+        "selectedIconPath": "pages/images/my_one.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "sitemapLocation": "sitemap.json"
+}

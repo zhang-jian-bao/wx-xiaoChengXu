@@ -1,0 +1,140 @@
+/* pages/shenQing/shenQing.wxss */
+/* 申请分销商 */
+.shenQing{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.shenQing>image{
+  width: 100%;
+  height: 150px;
+}
+.shenQing_con{
+  width: 100%;
+  height: 400px;
+}
+.shenQing_con>view:nth-child(1){
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 12px;
+  border-bottom: 1px solid #eee;
+}
+.shenQing_con_one{
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+.shenQing_con_one>text{
+  color: red;
+  margin-left: 40px;
+}
+.shenQing_con_two{
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+}
+.shenQing_con_two_one{
+  width: 80px;
+  display: flex;
+}
+.shenQing_con_two_one>text{
+  color: red;
+  margin-left: 4px;
+}
+.shenQing_con_two>input{
+  width: 100%;
+  /* border: 1px solid #000; */
+  height: 40px;
+  margin-left: 30px;
+}
+.shenQing_con_three{
+  font-size: 12px;
+  color: #ccc;
+  padding: 4px 10px 40px;
+}
+.shenQing_con>button{
+  background: greenyellow;
+  color: #fff;
+}
+/* 固定导航 */
+.zi_bottom{
+  position: fixed;
+  right: 0;
+  bottom: 60px;
+  width: 60px;
+  height: 40px;
+  border-radius: 6px 0 0 6px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.zi_bottom>image{
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.zi_bottom>view{
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+}
+/* 出来的那个导航 */
+.zi_bottom_one{
+  position: fixed;
+  bottom: 60px;
+  right: 0;
+  width: 80%;
+  height: 40px;
+  /* border: 1px solid #000; */
+  display: flex;
+}
+.zi_bottom_one_nav{
+  width: 60px;
+  height: 40px;
+  border-radius: 6px 0 0 6px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.zi_bottom_one_nav>image{
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.zi_bottom_one_nav>text{
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+  display: block;
+}
+.zi_bottom_two{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+.zi_bottom_two_dd{
+  width: 25%;
+  text-align: center;
+}
+.zi_bottom_two_dd>image{
+  width: 20px;
+  height: 20px;
+}
+.zi_bottom_two_dd>text{
+  display: block;
+  font-size: 12px;
+}

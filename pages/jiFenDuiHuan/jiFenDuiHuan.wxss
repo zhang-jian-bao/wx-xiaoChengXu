@@ -1,0 +1,106 @@
+/* pages/jiFenDuiHuan/jiFenDuiHuan.wxss */
+/* 整体 */
+.jiFenDuiHuan{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  /* background: #eee; */
+}
+page{
+  height: 100%;
+}
+.jiFenDuiHuan_one{
+  padding: 0 10px;
+  height: 40px;
+  background: #fff;
+  margin: 10px 0 20px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  line-height: 40px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.jiFenDuiHuan_one>input{
+  width: 80%;
+  height: 40px;
+}
+.jiFenDuiHuan>button{
+  background: red;
+  color: #fff;
+}
+/* 固定导航 */
+.zi_bottom{
+  position: fixed;
+  right: 0;
+  bottom: 40px;
+  width: 60px;
+  height: 40px;
+  border-radius: 6px 0 0 6px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.zi_bottom>image{
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.zi_bottom>view{
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+}
+/* 出来的那个导航 */
+.zi_bottom_one{
+  position:fixed;
+  bottom: 40px;
+  right: 0;
+  width: 80%;
+  height: 40px;
+  /* border: 1px solid #000; */
+  display: flex;
+}
+.zi_bottom_one_nav{
+  width: 60px;
+  height: 40px;
+  border-radius: 6px 0 0 6px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.zi_bottom_one_nav>image{
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.zi_bottom_one_nav>text{
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+  display: block;
+}
+.zi_bottom_two{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+.zi_bottom_two_dd{
+  width: 25%;
+  text-align: center;
+}
+.zi_bottom_two_dd>image{
+  width: 20px;
+  height: 20px;
+}
+.zi_bottom_two_dd>text{
+  display: block;
+  font-size: 12px;
+}
