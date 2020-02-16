@@ -1,16 +1,46 @@
 <!--pages/shop/shop.wxml-->
+<!-- 购物车页面 -->
 <view class="box_shop">
-
-  <view class="shop_shop">
+<!--没有添加到购物车的时候，显示，有的话就隐藏，显示数据  -->
+  <view class="shop_shop" wx:if="{{!isLength}}">
     <image src="../images/shop_one.png"></image>
     <view>购物车空空如也~</view>
-    <button>去逛逛</button>
+    <button bindtap="index">去逛逛</button>
   </view>
-
+  <!-- 添加到购物车的数据，有显示，没有就隐藏 -->
+  <view wx:for="{{list}}" wx:if="{{isLength}}" class="shop_list">
+    <image src="{{item.pic}}"></image>
+    <view class="shop_list_one">
+      <view class="shop_list_one_left">
+        <view class="shop_list_one_left_text">{{item.name}}</view>
+        <view class="shop_list_one_left_price">${{item.price}}</view>
+        <text wx:for="{{item.sku}}">
+          <text class="as">{{item.optionName}}:{{item.optionValueName}}</text>
+        </text>
+      </view>
+      <view class="shop_list_one_right">
+       <button class="btn" bindtap="del" 
+       data-key="{{item.key}}">删除</button>
+        <view>
+            <button class="btn btn_one" bindtap="jian"
+            data-num="{{item.number}}"
+            data-key="{{item.key}}"
+            data-index="{{index}}">-</button>
+            <view class="shop_list_one_right_num">{{item.number}}</view>
+            <button class="btn btn_one" bindtap="jia"
+            data-num="{{item.number}}"
+            data-key="{{item.key}}"
+             data-index="{{index}}">+</button>
+        </view>
+      </view>
+    </view>
+  
+  </view>
+  
   <view class="cha">
 <!-- 插入广告 -->
-  <image src="../images/api_one.jpg"></image>
-</view>
+  <image src="../images/api_one.jpg" wx:if="{{!isLength}}"></image>
+  </view>
 
 </view>
 

@@ -1,9 +1,12 @@
 //index.js
 //获取应用实例
+var that;
 const app = getApp()
 
 Page({
     data: {
+      page:1,
+      sl:'上拉加载。。。',
       keyWord:[],
       searchValue:"",
       gao:"",
@@ -15,28 +18,30 @@ Page({
       indicatorDots: true,  //小点
       autoplay: true,  //是否自动轮播
     },
+    //上拉加载
+
     //点击拼团，跳转商品详情页
     pingTuan:function(e){
       console.log(e);
-      let a = e.currentTarget.dataset.ping.name;
+      let a = e.currentTarget.dataset.ping.id;
       wx.navigateTo({
-        url: '/pages/xiangQin/xiangQin?name=' + a,
+        url: '/backpageF/pages/xiangQin/xiangQin?id=' + a,
       })
     },
     //点击砍价，跳转商品详情页
     kan:function(e){
       console.log(e);
-      let a = e.currentTarget.dataset.kan.name;
+      let a = e.currentTarget.dataset.kan.id;
       wx.navigateTo({
-        url: '/pages/xiangQin/xiangQin?name='+a,
+        url: '/backpageF/pages/xiangQin/xiangQin?id='+a,
       })
     },
     //点击商品跳转到商品详情页
     xiangQin:function(e){
       console.log(e);
-      let name = e.currentTarget.dataset.aa.name
+      let id = e.currentTarget.dataset.aa.id
       wx.navigateTo({
-        url: "/pages/xiangQin/xiangQin?name="+name,
+        url: "/backpageF/pages/xiangQin/xiangQin?id="+id,
       })
     },
     //搜索框的数据
@@ -51,30 +56,30 @@ Page({
     let that=this;
     let keyWord=JSON.stringify(this.data.keyWord);
      wx.navigateTo({//路由传参
-      url: '/pages/shangPin/shangPin?value='+this.data.searchValue,
+       url: '/backpageE/pages/shangPin/shangPin?value='+that.data.searchValue,
     })
   },
     //点击固定定位礼物跳转领劵中心
     linJuan:function(e){
       wx.navigateTo({
-        url: "/pages/linJuan/linJuan",
+        url: "/backpageC/pages/linJuan/linJuan",
       })
     },
     //点击公告
     gongGao:function(e){
       wx.navigateTo({
-        url: "/pages/gongGao/gongGao",
+        url: "/backpageE/pages/gongGao/gongGao",
       })
     },
     //点击上装。。。跳转到商品列表
     shangPin:function(e){
       console.log(e);
-      let id = e.currentTarget.dataset.item.name;
+      let id = e.currentTarget.dataset.item.id;
       console.log(id);
       let that = this;
       // let keyWord = JSON.stringify(this.data.keyWord);
       wx.navigateTo({
-        url: '/pages/shangPin/shangPin?id='+id,
+        url: '/backpageE/pages/shangPin/shangPin?id='+id,
       })
     },
     /**
@@ -84,7 +89,7 @@ Page({
       let _this = this;//--->改变this的指向
       // 商品列表
       wx.request({
-        url: 'https://api.it120.cc/Andydd/shop/goods/list',
+        url: 'https://api.it120.cc/zhangjianbao/shop/goods/list',
         success: function (res) {
           console.log(res);
           _this.setData({ list: res.data.data })
@@ -133,7 +138,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      that=this;
+     
     },
 
     /**
@@ -161,6 +167,38 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
+      that.setData({
+        sl: '加载中。。。'
+      });
+      setTimeout(function () {
+        wx.request({
+          url: 'https://api.it120.cc/Andydd/shop/goods/list',
+          data: {
+            page: that.data.page,
+            pageSize: 10
+          },
+          success(res) {
+            console.log(res);
+            if(res.data.code==0){
+              wx.pageScrollTo({
+                scrollTop: 1300
+              })
+              that.setData({
+                list: res.data.data
+              })
+              that.setData({
+                sl: '上拉加载。。。。'
+              });
+            }else if(res.data.code==700){
+              that.setData({
+                sl: '朕是有底线的~'
+              });
+              return false;
+            }
+            that.data.page++;
+          }
+        })
+      }, 500)
 
     },
 

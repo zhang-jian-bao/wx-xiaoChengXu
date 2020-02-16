@@ -1,4 +1,5 @@
 // pages/my/my.js
+var _self;
 Page({
 
   /**
@@ -7,13 +8,134 @@ Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isHide: false
+    isHide: false,
+    encry: '',
+    iv: '',
+    user: "",
+    openid: '',
+    token: '',
+    uis: '',
+    userInfo:'',
+    isLog:false,
+    isHide_one:false
+  },
+  //退出登录
+  tui(){
+    // wx.request({
+    //   url: 'https://api.it120.cc/zhangjianbao/user/loginout',
+    //   data:{
+    //     token:wx.getStorageSync('token');
+    //   },
+    //   success(res){
+    //     console.log(res);
+    //     wx.navigateTo({
+    //       url: '/pages/start/start',
+    //     })
+    //   }
+    // })
+    wx.clearStorageSync('token');
+    wx.clearStorageSync('userInfo');
+    wx.clearStorageSync('openid');
+    wx.clearStorageSync('uid');
+    wx.navigateTo({
+          url: '/pages/start/start',
+        })
+  },
+  aa(e) {
+    console.log(e)
+    if (!e.detail.iv) {
+      wx.showLoading({
+        title: '取消登录',
+      })
+      setTimeout(function () {
+        wx.hideLoading();
+      }, 500)
+    } else {
+     
+      console.log(e.detail.userInfo)
+      wx.setStorageSync('userInfo', e.detail.userInfo)
+      _self.setData({
+        encry: e.detail.encryptedData,
+        iv: e.detail.iv,
+        userInfo:e.detail.userInfo,
+        isLog:true
+      })
+      _self.myLogin();
 
+    }
+
+  },
+  // 获取用户信息后登陆
+  myLogin() {
+    wx.login({
+      success(res) {
+        console.log(res.code)
+        wx.request({
+          url: 'https://api.it120.cc/zhangjianbao/user/wxapp/login',
+          data: {
+            code: res.code
+          },
+          success(res) {
+            console.log(res)
+            if (res.data.code == 10000) {
+              //  去注册
+              _self.register();
+              return false;
+            } else if (res.data.code == 0) {
+              wx.setStorageSync('openid', res.data.data.openid)
+              wx.setStorageSync('token', res.data.data.token)
+              wx.setStorageSync('uid', res.data.data.uid)
+              wx.showLoading({
+                title: '授权成功',
+              })
+              setTimeout(function () {
+                wx.hideLoading();
+                wx.navigateTo({
+                  url: '/pages/index/index',
+                })
+              }, 500)
+              _self.setData({
+                isHide:true
+              })
+            }
+          }
+        })
+      }
+    })
+  },
+  // 注册
+  register() {
+    wx.login({
+      success(res) {
+        console.log(res.code)
+        console.log(_self.data.encry)
+        console.log(_self.data.iv);
+        // 注册接口
+        wx.request({
+          url: 'https://api.it120.cc/zhangjianbao/user/wxapp/register/complex',
+          data: {
+            code: res.code,
+            encryptedData: _self.data.encry,
+            iv: _self.data.iv,
+          },
+          success(res) {
+            console.log(res)
+            _self.myLogin()
+          }
+        })
+      }
+    })
+  },
+  //点击收货地址，跳转
+  shouHuo(e){
+    wx.navigateTo({
+      url: '/backpageD/pages/shouHuoAddress/shouHuoAddress',
+    })
   },
   //点击暂不登录
   stop:function(e){
-    this.setData({
-      isHide:false
+    wx.switchTab({
+      url: '/pages/index/index',
     })
   },
   //点击授权登录，隐藏/显示模态框
@@ -34,86 +156,86 @@ Page({
   //点击领劵中心
   linJuan:function(e){
     wx.navigateTo({
-      url: "/pages/linJuan/linJuan",
+      url: "/backpageC/pages/linJuan/linJuan",
     })
   },
   //点击积分兑换
   jiFenDuiHuan:function(e){
     wx.navigateTo({
-      url: "/pages/jiFenDuiHuan/jiFenDuiHuan",
+      url: "/backpageC/pages/jiFenDuiHuan/jiFenDuiHuan",
     })
   },
   //点击每日签到
   qianDao:function(e){
     wx.navigateTo({
-      url: '/pages/qianDao/qianDao',
+      url: '/backpageC/pages/qianDao/qianDao',
     })
   },
   //点击优惠买单
   you:function(e){
     wx.navigateTo({
-      url: '/pages/youHui/youHui',
+      url: '/backpageC/pages/youHui/youHui',
     })
   },
   //点击开票记录
   faPiaoJiLu:function(e){
     wx.navigateTo({
-      url:"/pages/faPiaoJiLu/faPiaoJiLu",
+      url:"/backpageC/pages/faPiaoJiLu/faPiaoJiLu",
     })
   },
   //点击发票申请
   faPiao:function(e){
     wx.navigateTo({
-      url: '/pages/faPiao/faPiao',
+      url: '/backpageB/pages/faPiao/faPiao',
     })
   },
   //点击分销商跳转
   fenXiaoShang:function(e){
     wx.navigateTo({
-      url: '/pages/fenXiaoShang/fenXiaoShang',
+      url: '/backpageB/pages/fenXiaoShang/fenXiaoShang',
     })
   },
   //点击退款/售后
   kuan:function(e){
     wx.navigateTo({
-      url: '/pages/tui/tui',
+      url: '/backpageB/pages/tui/tui',
     })
   },
   //点击待评价
   ping:function(e){
     wx.navigateTo({
-      url: '/pages/dingDan/dingDan?num=3',
+      url: '/backpageA/pages/dingDan/dingDan?num=3',
     })
   },
   //点击待收货
   shou:function(e){
     wx.navigateTo({
-      url: '/pages/dingDan/dingDan?num=2',
+      url: '/backpageA/pages/dingDan/dingDan?num=2',
     })
   },
   //点击代发货
   fa:function(e){
     let num=1;
     wx.navigateTo({
-      url: '/pages/dingDan/dingDan?num=1',
+      url: '/backpageA/pages/dingDan/dingDan?num=1',
     })
   },
   //点击我的订单和待付款
   ding:function(e){
     wx.navigateTo({
-      url: '/pages/dingDan/dingDan',
+      url: '/backpageA/pages/dingDan/dingDan',
     })
   },
   //点击积分
   jiFen:function(e){
   wx.navigateTo({
-    url: '/pages/jiFen/jiFen',
+    url: '/backpageA/pages/jiFen/jiFen',
   })
   },
   // 点击余额
   yu:function(e){
     wx.navigateTo({
-      url: '/pages/zi/zi',
+      url: '/backpageA/pages/zi/zi',
     })
   },
   //授权登录
@@ -147,44 +269,48 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  yunXu(){//允许
+    var userInfo = wx.getStorageSync('userInfo');
+    _self.setData({
+      isLog: true,
+      userInfo: userInfo,
+      isHide: true
+    })
+  },
   onLoad: function (options) {
-    var that = this;
-    // 查看是否授权
-    wx.getSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: function (res) {
-              // 用户已经授权过,不需要显示授权页面,所以不需要改变 isHide 的值
-              // 根据自己的需求有其他操作再补充
-              // 我这里实现的是在用户授权成功后，调用微信的 wx.login 接口，从而获取code
-              wx.login({
-                success: res => {
-                  // 获取到用户的 code 之后：res.code
-                  console.log("用户的code:" + res.code);
-                  // 可以传给后台，再经过解析获取用户的 openid
-                  // 或者可以直接使用微信的提供的接口直接获取 openid ，方法如下：
-                  // wx.request({
-                  //     // 自行补上自己的 APPID 和 SECRET
-                  //     url: 'https://api.weixin.qq.com/sns/jscode2session?appid=自己的APPID&secret=自己的SECRET&js_code=' + res.code + '&grant_type=authorization_code',
-                  //     success: res => {
-                  //         // 获取到用户的 openid
-                  //         console.log("用户的openid:" + res.data.openid);
-                  //     }
-                  // });
-                }
-              });
-            }
-          });
-        } else {
-          // 用户没有授权
-          // 改变 isHide 的值，显示授权页面
-          that.setData({
-            isHide: true
-          });
-        }
-      }
-    });
+    _self = this;
+    var token = wx.getStorageSync('token');
+    var userInfo = wx.getStorageSync('userInfo');     
+         if(!token){
+           wx.showToast({
+             title: '请先登录',
+           })
+         }else{
+           _self.setData({
+             isLog: true,
+             userInfo: userInfo,
+             isHide:true
+           })
+         }
+    // wx.showModal({
+    //   title: '提示',
+    //   content: '是否需要登录微信',
+    //   success(res) {
+    //     if (res.confirm) {
+    //       var token = wx.getStorageSync('token');
+    //       var userInfo = wx.getStorageSync('userInfo')
+    //       _self.setData({
+    //         isLog: true,
+    //         userInfo: userInfo
+    //       })
+    //     } else if (res.cancel) {
+    //       _self.setData({
+    //         isLog: false
+    //       })
+    //     }
+    //   }
+    // })
+ 
   },
 
   /**
@@ -198,7 +324,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

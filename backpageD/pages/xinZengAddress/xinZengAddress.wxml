@@ -1,0 +1,62 @@
+<!--pages/xinZengAddress/xinZengAddress.wxml-->
+<!-- 新增地址 -->
+<view class="address">
+  <!-- 读取微信地址 -->
+  <view hover-class="active" class="address_wx" bindtap="wx_address">读取微信地址</view>
+  <!-- 详细内容 -->
+  <view class="address_con">
+    <view class="address_con_one">
+      <view>联系人</view>
+      <input placeholder="姓名" value="{{userName}}" bindinput="name"></input>
+    </view>
+    <view class="address_con_one">
+      <view>手机号码</view>
+      <input placeholder="11位手机号码" value="{{telNumber}}"
+      bindinput="number"></input>
+    </view>
+    <view class="address_con_one">
+      <view>选择地区</view>
+      <input placeholder="请选择" value="{{cityName+countyName+detailInfo}}"></input>
+    </view>
+    <view class="address_con_one">
+      <view>详细地址</view>
+      <input placeholder="街道门牌信息" value="{{address}}" 
+      bindinput="address"></input>
+    </view>
+    
+  </view>
+<!-- 保存地址 -->
+    <view hover-class="active_one" class="address_bao" bindtap="baoCun">保存</view>
+
+     <!-- 底部固定导航 -->
+  <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
+    <image src="../images/ll.png"></image>
+    <view>快速导航</view>
+  </view>
+  <view class="zi_bottom_one" wx:if="{{show}}" bindtap="show">
+    <view class="zi_bottom_one_nav">
+      <image src="../images/rl.png"></image>
+      <text>快速导航</text>
+    </view>
+    <view class="zi_bottom_two">
+       <view class="zi_bottom_two_dd" bindtap="index">
+      <image src="../images/show.png"></image>
+      <text>首页</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="fen">
+      <image src="../images/fen_one.png"></image>
+      <text>分类</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="shop">
+      <image src="../images/shop_one.png"></image>
+      <text>购物车</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="my">
+      <image src="../images/my.png"></image>
+      <text>我的</text>
+    </view>
+    </view>
+
+  </view>
+<!-- 结束 -->
+</view>

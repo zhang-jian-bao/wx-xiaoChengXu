@@ -1,0 +1,54 @@
+<!--pages/shouHuoAddress/shouHuoAddress.wxml-->
+<!-- 收货地址 -->
+<view class="shouHuo">
+
+    <!-- 内容 -->
+    <view class="shouHuo_con">
+      <view class="shouHuo_con_one" wx:for="{{list}}">
+        <view  class="shouHuo_con_two"  bindtap="black">
+        <view>{{item.userName}}<text>{{item.telNumber}}</text></view>
+        <view>{{item.address}}</view>
+      </view>
+      <image src="../images/edit.png"  bindtap="page"></image>
+      </view>
+    </view>
+    <!-- 底部固定 -->
+    <view class="shouHuo_con_three" bindtap="xinZengAddress">
+      <view>+</view>
+      <view>新增收货地址</view>
+      <image src="../images/rihgt.png"></image>
+    </view>
+
+     <!-- 底部固定导航 -->
+  <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
+    <image src="../images/ll.png"></image>
+    <view>快速导航</view>
+  </view>
+  <view class="zi_bottom_one" wx:if="{{show}}" bindtap="show">
+    <view class="zi_bottom_one_nav">
+      <image src="../images/rl.png"></image>
+      <text>快速导航</text>
+    </view>
+    <view class="zi_bottom_two">
+       <view class="zi_bottom_two_dd" bindtap="index">
+      <image src="../images/show.png"></image>
+      <text>首页</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="fen">
+      <image src="../images/fen_one.png"></image>
+      <text>分类</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="shop">
+      <image src="../images/shop_one.png"></image>
+      <text>购物车</text>
+    </view>
+     <view class="zi_bottom_two_dd" bindtap="my">
+      <image src="../images/my.png"></image>
+      <text>我的</text>
+    </view>
+    </view>
+
+  </view>
+
+<!-- 结束 -->
+</view>

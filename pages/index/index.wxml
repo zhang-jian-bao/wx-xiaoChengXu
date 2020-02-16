@@ -27,11 +27,16 @@
  </view>
  <!-- 搜索结束 -->
 <!-- <image src="{{img}}" class="banner"></image> -->
+
 <view class="top" bindtap="gongGao">
 <image src="{{img1}}" class="img1"></image>
-<text class="top_one">{{gao}}</text>
+<scroll-view scroll-y="true" style="height:40px;line-height:40px;width:200px;">
+<view class="top_one">{{gao}}</view>
+<view class="top_one">更多公告</view>
+</scroll-view>
 <text class="top_two">更多 > </text>
 </view>
+
 <view class="con">
 <!-- 循环图片和文本 -->
   <view wx:for="{{arr}}" wx:for-item="item" wx:for-index="idx" class="con_b" bindtap="shangPin" data-item="{{item}}">
@@ -100,5 +105,7 @@
   <view  class="gu" bindtap="linJuan">
     <image src="../images/lia.png"></image>
   </view>
+  <!-- 上拉加载 -->
+  <view class="index_sl">{{sl}}</view>
 <!-- 整体布局结束 -->
 </view>

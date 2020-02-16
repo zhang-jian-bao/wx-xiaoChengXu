@@ -2,8 +2,10 @@
 <!-- 页面整体布局开始 -->
 <view class="my_deng">
 <!-- 登录 -->
-<image src="../images/deng.png"></image>
-<view>点击登录账户</view>
+  <image src="../images/my.png" wx:if="{{!isLog}}"></image>
+<button bindgetuserinfo="aa" open-type="getUserInfo" wx:if="{{!isLog}}">点击登录账户</button>
+  <image src="{{userInfo.avatarUrl}}" wx:if="{{isLog}}" class="imgg"></image>
+  <view class="imggg" wx:if="{{isLog}}">{{userInfo.nickName}}</view>
 </view>
 <view class="my_yu">
 <!-- 余额开始 -->
@@ -90,7 +92,7 @@
     <view>积分兑换</view>
     <image src="../images/rihgt.png"></image>
 </view>
-<view class="my_ding_one">
+<view class="my_ding_one" bindtap="shouHuo">
     <view>收货地址</view>
     <image src="../images/rihgt.png"></image>
 </view>
@@ -110,13 +112,14 @@
     <button size="mini">立即绑定</button>
 </view>
 <view class="my_ding_one my_kai_two">
-    <button bindtap="login" wx:if="{{!isHide}}">授权登录</button>
-    <button bindtap="login" wx:if="{{isHide}}">退出登录</button>
+    <button open-type="getUserInfo" bindgetuserinfo="aa"
+     wx:if="{{!isHide}}">授权登录</button>
+    <button bindtap="tui" wx:if="{{isHide}}">退出登录</button>
     <image src="../images/rihgt.png"></image>
 </view>
 </view>
 <!-- 授权登录模态框 -->
-<view class="moTai" wx:if="{{isHide}}">
+<view class="moTai" wx:if="{{isHide_one}}">
   <view class="moTai_one">
     <view class="moTai_two">
       <image src="../images/deng.png"></image>
@@ -125,7 +128,7 @@
     <view class="moTai_three">· 请授权小程序登录</view>
     <view class="moTai_three moTai_four">· 我们不会公布您的这些信息</view>
     <view class="moTai_three moTai_five">· 只是为了给您提供更好的服务</view>
-    <button  class="moTai_button">允许</button>
+    <button  class="moTai_button" bindtap="yunXu">允许</button>
     <button class="moTai_button_one" bindtap="stop">暂不登录</button>
   </view>
 </view>

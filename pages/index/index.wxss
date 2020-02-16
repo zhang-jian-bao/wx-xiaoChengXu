@@ -272,3 +272,9 @@
 .shop{
   height:auto;
 }
+/* 上拉加载 */
+.index_sl{
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+}

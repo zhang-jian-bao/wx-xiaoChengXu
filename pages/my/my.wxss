@@ -17,6 +17,12 @@
   width: 80px;
   height: 80px;
 }
+.imgg{
+  border-radius: 50%;
+}
+.my_deng .imggg{
+  border: none;
+}
 .my_deng>view{
   font-size: 14px;
   width: 100px;

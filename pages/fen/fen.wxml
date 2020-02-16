@@ -34,7 +34,7 @@
       </view>
        </view>
      <!-- </scroll-view> -->
-     <view wx:if="{{!shop}}">————暂无数据————</view>
+     <view wx:if="{{!shop}}" class="fen_end">————暂无数据————</view>
       <!-- 右边导航栏布局结束 -->
     </view>
   
