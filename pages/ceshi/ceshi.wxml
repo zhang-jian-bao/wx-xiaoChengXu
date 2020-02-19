@@ -1,4 +1,0 @@
-<!--pages/ceshi/ceshi.wxml-->
-<import src="../../tem/tem.wxml" />
-
-<template is="nav" data="{{show}}"></template>

@@ -6,8 +6,7 @@
     "pages/fen/fen",
     "pages/shop/shop",
     "pages/my/my",
-    "pages/tem/tem",
-    "pages/ceshi/ceshi"
+    "pages/tem/tem"
   ],
   "subPackages": [
     {
@@ -96,12 +95,6 @@
         "iconPath": "pages/images/my.png",
         "selectedIconPath": "pages/images/my_one.png",
         "text": "我的"
-      },
-      {
-        "pagePath": "pages/ceshi/ceshi",
-        "iconPath": "pages/images/my.png",
-        "selectedIconPath": "pages/images/my_one.png",
-        "text": "测试"
       }
     ]
   },

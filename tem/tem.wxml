@@ -1,41 +1,48 @@
 
 <!-- 封装公共模板 -->
-<template name="nav">
-   <!-- 底部固定导航 -->
-  <view>
-      <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
-    <image src="../images/ll.png"></image>
-    <view>快速导航</view>
+<template name="shop">
+  <view class="shop_shop" wx:if="{{!isLength}}">
+    <image src="../images/shop_one.png"></image>
+    <view>购物车空空如也~</view>
+    <button bindtap="index">去逛逛</button>
   </view>
-  <view class="zi_bottom_one" wx:if="{{show}}" bindtap="show">
-    <view class="zi_bottom_one_nav">
-      <image src="../images/rl.png"></image>
-      <text>快速导航</text>
-    </view>
-    <view class="zi_bottom_two">
-       <view class="zi_bottom_two_dd" bindtap="index">
-      <image src="../images/show.png"></image>
-      <text>首页</text>
-    </view>
-     <view class="zi_bottom_two_dd" bindtap="fen">
-      <image src="../images/fen_one.png"></image>
-      <text>分类</text>
-    </view>
-     <view class="zi_bottom_two_dd" bindtap="shop">
-      <image src="../images/shop_one.png"></image>
-      <text>购物车</text>
-    </view>
-     <view class="zi_bottom_two_dd" bindtap="my">
-      <image src="../images/my.png"></image>
-      <text>我的</text>
-    </view>
-    </view>
-
-  </view>
+  
+  <view class="cha">
+<!-- 插入广告 -->
+  <image src="../images/api_one.jpg" wx:if="{{!isLength}}"></image>
   </view>
 </template>
-<template name="aa">
-  <view style="color:res">我是公共模板</view>
+
+<template name="shop_list">
+<!-- 添加到购物车的数据，有显示，没有就隐藏 -->
+  <view wx:for="{{list}}" wx:if="{{isLength}}" class="shop_list">
+    <image src="{{item.pic}}"></image>
+    <view class="shop_list_one">
+      <view class="shop_list_one_left">
+        <view class="shop_list_one_left_text">{{item.name}}</view>
+        <view class="shop_list_one_left_price">${{item.price}}</view>
+        <text wx:for="{{item.sku}}">
+          <text class="as">{{item.optionName}}:{{item.optionValueName}}</text>
+        </text>
+      </view>
+      <view class="shop_list_one_right">
+       <button class="btn" bindtap="del" 
+       data-key="{{item.key}}">删除</button>
+        <view>
+            <button class="btn btn_one" bindtap="jian"
+            data-num="{{item.number}}"
+            data-key="{{item.key}}"
+            data-index="{{index}}">-</button>
+            <view class="shop_list_one_right_num">{{item.number}}</view>
+            <button class="btn btn_one" bindtap="jia"
+            data-num="{{item.number}}"
+            data-key="{{item.key}}"
+             data-index="{{index}}">+</button>
+        </view>
+      </view>
+    </view>
+  
+  </view>
 </template>
 
 
