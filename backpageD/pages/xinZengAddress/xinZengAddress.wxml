@@ -16,7 +16,11 @@
     </view>
     <view class="address_con_one">
       <view>选择地区</view>
-      <input placeholder="请选择" value="{{cityName+countyName+detailInfo}}"></input>
+       <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+    <view class="picker">
+     {{region[0]}}-{{region[1]}}-{{region[2]}}
+    </view>
+  </picker>
     </view>
     <view class="address_con_one">
       <view>详细地址</view>
@@ -26,8 +30,9 @@
     
   </view>
 <!-- 保存地址 -->
-    <view hover-class="active_one" class="address_bao" bindtap="baoCun">保存</view>
-
+    <view wx:if="{{!edit}}" hover-class="active_one" class="address_bao" bindtap="baoCun">保存</view>
+     <view wx:if='{{edit}}' hover-class="active_one" class="address_bao" bindtap="edit">修改</view>
+      <view wx:if='{{edit}}' hover-class="active_one" class="address_bao" bindtap="del">删除</view>
      <!-- 底部固定导航 -->
   <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
     <image src="../images/ll.png"></image>

@@ -195,20 +195,23 @@
         </view>
       </view>
       <view class="xinagQing_shop_two">
-        <view wx:for="{{list_one}}" wx:if="{{index==0}}">
+        <view wx:for="{{list_one}}" wx:for-index="inn"
+        wx:for-item="far">
           <view >
-          <view>{{item.name}}</view>
-            <block wx:for="{{item.childsCurGoods}}" >
+          <view>{{far.name}}</view>
+            <block wx:for="{{far.childsCurGoods}}" >
               <text bindtap="yanse" id="{{item.id}}"
               data-index="{{index}}" data-aa="{{item}}"
-              class="xinagQing_shop_two_one {{num==index?'aa':''}}">
+              data-fid="{{far.id}}" data-finn="{{inn}}"
+              class="xinagQing_shop_two_one {{item.active?'aa':''}}">
+
               {{item.name}}</text>
           </block>
           
           </view>
         
         </view>
-        <view wx:for="{{list_one}}" wx:if="{{index==1}}">
+        <!-- <view wx:for="{{list_one}}" wx:if="{{index==1}}">
           <view >
           <view>{{item.name}}</view>
             <block wx:for="{{item.childsCurGoods}}" >
@@ -220,8 +223,8 @@
           
           </view>
         
-        </view>
-        <view wx:for="{{list_one}}" wx:if="{{index==2}}">
+        </view> -->
+        <!-- <view wx:for="{{list_one}}" wx:if="{{index==2}}">
           <view >
           <view>{{item.name}}</view>
             <block wx:for="{{item.childsCurGoods}}" >
@@ -233,7 +236,7 @@
           
           </view>
         
-        </view>
+        </view> -->
       </view>
       <view class="xinagQing_shop_four">
         <view>购买数量</view>

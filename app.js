@@ -3,8 +3,34 @@ App({
   data:{
     Flag:false
   },
+
   onLaunch: function () {
     // 展示本地存储能力
+    wx.request({//检测token是否有效
+      url: 'https://api.it120.cc/zhangjianbao/user/check-token',
+      data:{
+        token:wx.getStorageSync('token')
+      },
+      success(res){
+        console.log(res);
+        if(res.data.code==0){
+          console.log("登录成功")
+        }else if(res.data.code==2000){
+          wx.showModal({
+            title: '登录过期',
+            content: '登录已过期，请重新登录',
+            showCancel:false,//是否显示取消按钮
+            success(res){
+              if(res.confirm){
+                wx.navigateTo({
+                  url: '/pages/login/login',
+                })
+              }
+            }
+          })
+        }
+      }
+    })
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -37,6 +63,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    // http:require('../com/http.js'),//全局注册
+    // regeneratorRuntime:require('../utils/regenerator-runtime/runtime.js')
   }
 })

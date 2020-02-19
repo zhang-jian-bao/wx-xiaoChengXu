@@ -1,5 +1,7 @@
 // pages/xiangQin/xiangQin.js
 var that;
+const http=require('../../../com/http.js');
+// const regeneratorRuntime=require('../../../utils/regenerator-runtime/runtime.js');
 Page({
 
   /**
@@ -60,113 +62,120 @@ Page({
       })
     }
   },
-  //点击规格
-  guiGe(e) {
-    console.log(e);
-    // var arr = [];
-    var id = e.currentTarget.id;
-    var index = e.currentTarget.dataset.index;
-    // that.data.num_two=index;
-    // arr.push(id);
-    this.setData({ arr_two: id, index_two: index ,num_two:index})
-    console.log(index);
-    console.log(id);
-  },
-  //点击尺寸
-  chiCun(e){
-    console.log(e);
-    var id = e.currentTarget.id;
-    var index = e.currentTarget.dataset.index;
-    // that.data.num_one = index;
-    this.setData({ arr_one: id, index_one: index, num_one: index})
-    console.log(index);
-    console.log(id);
-  },
   //点击选择规格
   yanse(e){
     console.log(e);
     var id=e.currentTarget.id;
     var index=e.currentTarget.dataset.index;
-    // that.data.num= index;
-
-    this.setData({ arr: id, index: index, num: index})
-    console.log(index);
-    console.log(id);
+    var fid = e.currentTarget.dataset.fid;
+    var arr=that.data.list_one;
+    //通过id找到对应的下标
+    var i=arr.findIndex((v)=>{
+      return v.id==fid;
+    })
+    arr[i].childsCurGoods.forEach((v)=>{
+     if(v.id==id){
+       if (v.active) {
+         v.active = false;
+       } else {
+         v.active = true;
+       }
+     }else{
+       v.active = false;
+     }
+    })
+    console.log(arr);
+    that.setData({
+      list_one:arr
+    })
   } ,
    //点击加入购物车
-  jiaRu:function(e){
-    if(that.data.list_one!=undefined){
-      if (that.data.arr == "" || that.data.arr_one == "" || that.data.arr_two == "") {
+  async jiaRu(e){
+    var arr=that.data.list_one;
+    if(arr){
+      var num = [];
+      var str='';
+      for(var i=0;i<arr.length;i++){
+        arr[i].childsCurGoods.forEach((v)=>{
+          if(v.active==true){
+            var obj = { 'optionId': v.propertyId,'optionValueId':v.id};
+            num.push(obj);
+           str+= v.propertyId+':'+v.id+','
+          }
+        })
+      }
+      //判断  定义存储  当前选中的数组  跟原规格的数组长度是否相等   不相等提示和return  退出  
+      if (num.length != arr.length) {
         wx.showToast({
           title: '请选择规格',
           icon: 'none',
-          duration: 1500
-        })
-      } else {
-        wx.request({
-          url: 'https://api.it120.cc/zhangjianbao/shopping-cart/add',
-          method: 'POST',
-          header: {
-            "content-type": "application/x-www-form-urlencoded"
-          },
-          data: {
-            goodsId: that.data.shopId,
-            number: that.data.shu,
-            sku: JSON.stringify(
-              [
-                { "optionId": '24003', "optionValueId": that.data.arr },
-                { "optionId": '24004', "optionValueId": that.data.arr_one },
-                { "optionId": '24006', "optionValueId": that.data.arr_two }
-              ]
-            ),
-            token: wx.getStorageSync('token')
-          },
-          success(res) {
-            console.log(res);
-          }
-        })
-        // }
-        wx.showToast({
-          title: '加入购物车！', // 标题
-          icon: 'success',  // 图标类型，默认success
-          duration: 1500  // 提示窗停留时间，默认1500ms
-        });
-        this.setData({
-          shop: false
+          duration: 2000
         })
 
-
+        return
       }
-    } else{
- wx.request({
-        url: 'https://api.it120.cc/zhangjianbao/shopping-cart/add',
-        method: 'POST',
-        header: {
-          "content-type": "application/x-www-form-urlencoded"
-        },
-        data: {
-          goodsId: that.data.shopId,
-          number: that.data.shu,
-          token: wx.getStorageSync('token')
-        },
-        success(res) {
-          console.log(res);
-          wx.showToast({
-            title: '加入购物车！', // 标题
-            icon: 'success',  // 图标类型，默认success
-            duration: 1500  // 提示窗停留时间，默认1500ms
-          });
-          that.setData({
-            shop: false
-          })
-        }
-      })
+        //加入购物车的接口
+      var add=await http.add({
+        goodsId: that.data.shopId,
+        number: that.data.shu,
+        sku: JSON.stringify(num),
+        token: wx.getStorageSync('token')
+      });
+      console.log(add);
+      if (add.data.code == 0) {
+             wx.showToast({
+               title: '加入购物车！', // 标题
+               icon: 'success',  // 图标类型，默认success
+               duration: 1500  // 提示窗停留时间，默认1500ms
+             });
+             that.setData({
+               shop: false
+             })
+           }
+    
+        // wx.request({
+        //   url: 'https://api.it120.cc/zhangjianbao/shopping-cart/add',
+        //   method: 'POST',
+        //   header: {
+        //     "content-type": "application/x-www-form-urlencoded"
+        //   },
+        //   data: {
+        //     goodsId: that.data.shopId,
+        //     number: that.data.shu,
+        //     sku: JSON.stringify(num),
+        //     token: wx.getStorageSync('token')
+        //   },
+        //   success(res) {
+        //     console.log(res);
+        //   
+        //   }
+        // })
+        // // 获取价格的接口
+        var price=await http.price({
+              goodsId: that.data.shopId,
+              propertyChildIds:str
+        })
+        console.log(price);
+      if (price.data.code == 0) {
+          
+              console.log('获取价格成功')
+            }
+        // wx.request({
+        //   url: 'https://api.it120.cc/zhangjianbao/shop/goods/price',
+        //   method:'GET',
+        //   data:{
+        //     goodsId: that.data.shopId,
+        //     propertyChildIds:str
+        //   },
+        //   success(res){
+        //     if(res.data.code==0){
+        //       console.log(res);
+        //       console.log('获取价格成功')
+        //     }
+        //   }
+        // })
       
     }
-   
-     
-    
-  
   },
   //点击花色
   check: function (e) {
@@ -305,7 +314,12 @@ Page({
       },
       success:function(res){
         console.log(res);
-   
+        // 给里面加一个active属性来判断
+        for(var i=0;i<res.data.data.length;i++){
+          res.data.data[i].childsCurGoods.forEach((v)=>{
+             v.active=false;
+          })
+        }
          that.setData({
            good_id: res.data.data.basicInfo.id,
            shopId:id,

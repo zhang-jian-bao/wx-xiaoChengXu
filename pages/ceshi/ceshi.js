@@ -1,31 +1,11 @@
-// pages/shouHuoAddress/shouHuoAddress.js
+// pages/ceshi/ceshi.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    show:false,
-    userName:'',
-    telNumber:'',
-    address:'',
-    list:[]
-  },
-  //点击编辑进入添加地址页面
-  page(){
-    wx.navigateTo({
-      url: '/pages/xinZengAddress/xinZengAddress?userName='+this.data.userName+'&telNumber'+this.data.telNumber+'&address'+this.data.address,
-    })
-  },
-  //点击返回上一页
-  black(e){
-    wx.navigateBack({})
-  },
-  //点击新增收货地址，跳转编辑地址页面
-  xinZengAddress(e){
-    wx.navigateTo({
-      url: '/pages/xinZengAddress/xinZengAddress',
-    })
+    show:false
   },
   //点击首页跳转
   index: function (e) {
@@ -61,26 +41,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that=this;
-    // wx.getStorage({
-    //   key: 'address',
-    //   success: function(res) {
-    //     console.log(res)
-    //     that.setData({
-    //       list:res.data.list
-    //     })
-    //   },
-    // })
-    wx.getStorage({
-      key: 'address',
-      success: function(res) {
-        console.log(res);
-        that.setData({
-          list: res.data
-        })
-      }
-    })
-    
+
   },
 
   /**

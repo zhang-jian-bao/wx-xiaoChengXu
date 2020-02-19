@@ -1,5 +1,6 @@
 // pages/shop/shop.js
 var that;
+const http=require('../../com/http.js');
 Page({
 
   /**
@@ -38,43 +39,60 @@ Page({
     // })
     that.sl(key,num);
   },
-  sl(a,b){
-    wx.request({
-      url: 'https://api.it120.cc/zhangjianbao/shopping-cart/modifyNumber',
-      method:"POST",
-      header: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      data:{
-        key:a,
-        number:b,
-        token:wx.getStorageSync('token')
-      },
-      success(res){
-        console.log(res);
-        that.list();//再次渲染到页面中
-      }
+  async sl(a,b){
+    var sl = await http.modifyNumber({
+      key: a,
+      number: b,
+      token: wx.getStorageSync('token')
     })
+    console.log(sl);
+    if(sl.data.code==0){
+      that.list();//再次渲染到页面中
+    }
+    // wx.request({
+    //   url: 'https://api.it120.cc/zhangjianbao/shopping-cart/modifyNumber',
+    //   method:"POST",
+    //   header: {
+    //     "content-type": "application/x-www-form-urlencoded"
+    //   },
+    //   data:{
+    //     key:a,
+    //     number:b,
+    //     token:wx.getStorageSync('token')
+    //   },
+    //   success(res){
+    //     console.log(res);
+    //     that.list();//再次渲染到页面中
+    //   }
+    // })
   },
   //点击删除按钮，删除当前数据
-  del(e){
+  async del(e){
     console.log(e);
     var index=e.currentTarget.dataset.key;
-    wx.request({
-      url: 'https://api.it120.cc/zhangjianbao/shopping-cart/remove',
-      method: 'POST',
-      header: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        key:[ index],
-        token: wx.getStorageSync('token')
-      },
-      success(res) {
-        console.log(res);
-        that.list();
-      }
+    var delate=await http.remove({
+      key: [index],
+      token: wx.getStorageSync('token')
     })
+    console.log(delate);
+    if(delate.data.code==0){
+      that.list();
+    }
+    // wx.request({
+    //   url: 'https://api.it120.cc/zhangjianbao/shopping-cart/remove',
+    //   method: 'POST',
+    //   header: {
+    //     "content-type": "application/x-www-form-urlencoded"
+    //   },
+    //   data: {
+    //     key:[ index],
+    //     token: wx.getStorageSync('token')
+    //   },
+    //   success(res) {
+    //     console.log(res);
+    //     that.list();
+    //   }
+    // })
   },
   //点击跳转到首页
   index(e){
@@ -96,30 +114,47 @@ Page({
   onReady: function () {
 
   },
-  list(){
-    wx.request({
-      url: 'https://api.it120.cc/zhangjianbao/shopping-cart/info',
-      method: 'GET',
-      data: {
-        token: wx.getStorageSync('token')
-      },
-      success(res) {
-        console.log(res);
-        if (res.data.code == 0) {
-          that.setData({
-            list: res.data.data.items,
-            list_gui: res.data.data.items.sku,
-            isLength: true,
-            num: res.data.data.items.number
-          })
-        }else if(res.data.code==700){
-          that.setData({
-            list: [],//当删除最后一天数据，让list数组为空，就没有数据渲染了
-            isLength:false
-          })
-        }
-      }
-    })
+  async list(){
+    var info=await http.info({
+      token: wx.getStorageSync('token')
+    });
+    console.log(info);
+    if (info.data.code == 0) {
+      that.setData({
+        list: info.data.data.items,
+        list_gui: info.data.data.items.sku,
+        isLength: true,
+        num: info.data.data.items.number
+      })
+    } else if (info.data.code == 700) {
+      that.setData({
+        list: [],//当删除最后一天数据，让list数组为空，就没有数据渲染了
+        isLength: false
+      })
+    }
+    // wx.request({
+    //   url: 'https://api.it120.cc/zhangjianbao/shopping-cart/info',
+    //   method: 'GET',
+    //   data: {
+    //     token: wx.getStorageSync('token')
+    //   },
+    //   success(res) {
+    //     console.log(res);
+    //     if (res.data.code == 0) {
+    //       that.setData({
+    //         list: res.data.data.items,
+    //         list_gui: res.data.data.items.sku,
+    //         isLength: true,
+    //         num: res.data.data.items.number
+    //       })
+    //     }else if(res.data.code==700){
+    //       that.setData({
+    //         list: [],//当删除最后一天数据，让list数组为空，就没有数据渲染了
+    //         isLength:false
+    //       })
+    //     }
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面显示

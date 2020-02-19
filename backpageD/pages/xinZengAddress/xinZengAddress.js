@@ -1,4 +1,5 @@
 // pages/xinZengAddress/xinZengAddress.js
+const http=require("../../../com/http.js");
 Page({
 
   /**
@@ -7,15 +8,109 @@ Page({
   data: {
     show:false,
     userName: " ",
-    cityName: "",
-    countyName: "",
-    detailInfo: "",
     telNumber: "",
     address:'',
-    list:[]
+    list:[],
+    region:'',
+    customItem:'请选择地区',
+    code:[],
+    edit:false,
+    userId:''
+  },
+  //删除地址
+  async del(){
+    var that=this;
+    var delate=await http.delate({
+      id: that.data.userId,
+      token: wx.getStorageSync('token')
+    });
+    console.log(delate);
+    if (delate.data.code == 0) {
+      wx.showToast({
+        title: '删除成功',
+        icon: 'success'
+      });
+      wx.navigateBack({})
+    }
+    // wx.request({
+    //   url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/delete',
+    //   method: 'POST',
+    //   header: {
+    //     "content-type": "application/x-www-form-urlencoded"
+    //   },
+    //   data:{
+    //     id:that.data.userId,
+    //     token:wx.getStorageSync('token')
+    //   },
+    //   success(res){
+    //     console.log(res);
+    //     if(res.data.code==0){
+    //       wx.showToast({
+    //         title: '删除成功',
+    //         icon:'success'
+    //       });
+    //       wx.navigateBack({})
+    //     }
+    //   }
+    // })
+  },
+  //修改地址
+  async edit(){
+    var that=this;
+    var edit = await http.update({
+      address: that.data.address,
+      linkMan: that.data.userName,
+      mobile: that.data.telNumber,
+      id: that.data.userId,
+      provinceId: that.data.code[1],
+      cityId: that.data.code[0],
+      token: wx.getStorageSync('token')
+    });
+    console.log(edit);
+    if (edit.data.code == 0) {
+          wx.showToast({
+            title: '修改成功',
+            icon:'success'
+          });
+          wx.navigateBack({});
+        }
+  //   wx.request({
+  //     url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/update',
+  //     method: 'POST',
+  //     header: {
+  //       "content-type": "application/x-www-form-urlencoded"
+  //     },
+  //     data:{
+  //       address: that.data.address,
+  //       linkMan: that.data.userName,
+  //       mobile: that.data.telNumber,
+  //       id:that.data.userId,
+  //       provinceId: that.data.code[1],
+  //       cityId: that.data.code[0],
+  //       token: wx.getStorageSync('token')
+  //     },
+  //     success(res){
+  //       console.log(res);
+  //       if(res.data.code==0){
+  //         wx.showToast({
+  //           title: '修改成功',
+  //           icon:'success'
+  //         });
+  //         wx.navigateBack({});
+  //       }
+  //     }
+  //   })
+  },
+  //选择地区
+  bindRegionChange: function (e) {
+    console.log(e)
+    this.setData({
+      region: e.detail.value,
+      code:e.detail.code
+    })
   },
   //点击保存
-  baoCun(e){
+  async baoCun(e){
     let that=this;
     var userName = this.data.userName;
     var mobile = this.data.telNumber;
@@ -64,21 +159,47 @@ Page({
       })
       return false;
     }else{
-      let obj = {
-        userName: userName,
-        telNumber: mobile,
-        address: this.data.address
-      };
-      let arr = [];
-      arr.push(obj);
-      console.log(obj);
-      console.log(arr);
-      that.setData({
-        list:arr
-      })
-     wx.setStorageSync('address', arr);
-      // 路由返回上一级
-      wx.navigateBack({});
+      var bao = await http.add_address({
+        address: that.data.address,
+          linkMan: userName,
+          mobile: mobile,
+          provinceId:that.data.code[1],
+          cityId:that.data.code[0],
+          token:wx.getStorageSync('token')
+      });
+      console.log(bao);
+      if(bao.data.code==0){
+        wx.navigateBack({});
+      }
+      // wx.request({
+      //   url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/add',
+      //   method: 'POST',
+      //   header: {
+      //     "content-type": "application/x-www-form-urlencoded"
+      //   },
+      //   data:{
+      //     address: that.data.address,
+      //     linkMan: userName,
+      //     mobile: mobile,
+      //     provinceId:that.data.code[1],
+      //     cityId:that.data.code[0],
+      //     token:wx.getStorageSync('token')
+      //   },
+      //   success(res){
+      //     console.log(res);
+      //     // 路由返回上一级
+      //     wx.navigateBack({});
+      //   }
+      // })
+      // let arr = [];
+      // arr.push(obj);
+      // console.log(obj);
+      // console.log(arr);
+      // that.setData({
+      //   list:arr
+      // })
+    //  wx.setStorageSync('address', arr);
+     
     }
     
     return true;
@@ -199,15 +320,45 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    let userName=options.userName;
-    let telNumber=options.telNumber;
-    let address=options.address;
-    this.setData({
-      userName:userName,
-      telNumber:telNumber,
-      address:address
-    })
+  async onLoad(options) {
+    var that=this;
+    var id=options.id
+    console.log(id);
+    var xq = await http.address_xiangQin({
+          id: id,
+          token:wx.getStorageSync('token')
+    });
+    console.log(xq);
+    if (xq.data.code == 0) {
+         that.setData({
+           userName: xq.data.data.info.linkMan,
+           telNumber: xq.data.data.info.mobile,
+           address: xq.data.data.info.address,
+           region: [],
+           edit:true,
+           userId: xq.data.data.info.id
+         })
+        }
+    // wx.request({
+      // url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/detail/v2',
+      // data:{
+      //     id:id,
+      //     token:wx.getStorageSync('token')
+      // },
+      // success(res){
+      //   console.log(res);
+    //     if(res.data.code==0){
+    //      that.setData({
+    //        userName: res.data.data.info.linkMan,
+    //        telNumber: res.data.data.info.mobile,
+    //        address: res.data.data.info.address,
+    //        region: [],
+    //        edit:true,
+    //        userId: res.data.data.info.id
+    //      })
+    //     }
+    //   }
+    // })
   },
 
   /**

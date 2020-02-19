@@ -5,61 +5,60 @@
     "pages/index/index",
     "pages/fen/fen",
     "pages/shop/shop",
-    "pages/my/my"
-   
-    ],
-    "subPackages":[
-      {
-          "root": "backpageA",
-          "pages": [
-            "pages/zi/zi",
-            "pages/jiFen/jiFen",
-            "pages/dingDan/dingDan"
-          ],
-          "independent": true
-      },
-      {
-        "root": "backpageB",
-        "pages": [
-         "pages/tui/tui",
-         "pages/fenXiaoShang/fenXiaoShang",
-         "pages/shenQing/shenQing",
-         "pages/faPiao/faPiao"
-        ]
-      },
-      {
-        "root": "backpageC",
-        "pages": [
-          "pages/faPiaoJiLu/faPiaoJiLu",
-          "pages/youHui/youHui",
-          "pages/qianDao/qianDao",
-          "pages/jiFenDuiHuan/jiFenDuiHuan",
-          "pages/linJuan/linJuan"
-        ]
-      },
-      {
-        "root": "backpageD",
-        "pages": [
-            "pages/queRenDingDan/queRenDingDan",
-            "pages/xinZengAddress/xinZengAddress",
-            "pages/shouHuoAddress/shouHuoAddress"
-        ]
-      },
-      {
-        "root": "backpageE",
-        "pages": [
-          "pages/shangPin/shangPin",
-          "pages/gongGao/gongGao",
-          "pages/xinZengAddress/xinZengAddress",
-          "pages/shouHuoAddress/shouHuoAddress"
-        ]
-      },
-      {
-        "root": "backpageF",
-        "pages": [
-          "pages/xiangQin/xiangQin"
-        ]
-      }
+    "pages/my/my",
+    "pages/tem/tem",
+    "pages/ceshi/ceshi"
+  ],
+  "subPackages": [
+    {
+      "root": "backpageA",
+      "pages": [
+        "pages/zi/zi",
+        "pages/jiFen/jiFen",
+        "pages/dingDan/dingDan"
+      ],
+      "independent": true
+    },
+    {
+      "root": "backpageB",
+      "pages": [
+        "pages/tui/tui",
+        "pages/fenXiaoShang/fenXiaoShang",
+        "pages/shenQing/shenQing",
+        "pages/faPiao/faPiao"
+      ]
+    },
+    {
+      "root": "backpageC",
+      "pages": [
+        "pages/faPiaoJiLu/faPiaoJiLu",
+        "pages/youHui/youHui",
+        "pages/qianDao/qianDao",
+        "pages/jiFenDuiHuan/jiFenDuiHuan",
+        "pages/linJuan/linJuan"
+      ]
+    },
+    {
+      "root": "backpageD",
+      "pages": [
+        "pages/queRenDingDan/queRenDingDan",
+        "pages/xinZengAddress/xinZengAddress",
+        "pages/shouHuoAddress/shouHuoAddress"
+      ]
+    },
+    {
+      "root": "backpageE",
+      "pages": [
+        "pages/shangPin/shangPin",
+        "pages/gongGao/gongGao"
+      ]
+    },
+    {
+      "root": "backpageF",
+      "pages": [
+        "pages/xiangQin/xiangQin"
+      ]
+    }
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -97,6 +96,12 @@
         "iconPath": "pages/images/my.png",
         "selectedIconPath": "pages/images/my_one.png",
         "text": "我的"
+      },
+      {
+        "pagePath": "pages/ceshi/ceshi",
+        "iconPath": "pages/images/my.png",
+        "selectedIconPath": "pages/images/my_one.png",
+        "text": "测试"
       }
     ]
   },

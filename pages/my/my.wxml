@@ -1,4 +1,6 @@
+
 <view class="my">
+
 <!-- 页面整体布局开始 -->
 <view class="my_deng">
 <!-- 登录 -->
@@ -134,5 +136,6 @@
 </view>
 <!-- 最后 -->
 <view class="my_end">Powered by EastWorld v 7.6.1</view>
+
 <!-- 页面整体布局结束 -->
 </view>

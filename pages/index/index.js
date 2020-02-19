@@ -1,8 +1,8 @@
 //index.js
 //获取应用实例
-var that;
-const app = getApp()
-
+var that;//申明全局this为that，在onload中写一下
+const app = getApp()//全局
+const http=require('../../com/http.js');//引入全局封装的http.js接口
 Page({
     data: {
       page:1,
@@ -85,16 +85,25 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
+    async bb(){
+      var aa = await http.shop_list();
+      console.log(aa);
+      this.setData({ list: aa.data.data })
+    },
     onLoad: function (options) {
       let _this = this;//--->改变this的指向
       // 商品列表
-      wx.request({
-        url: 'https://api.it120.cc/zhangjianbao/shop/goods/list',
-        success: function (res) {
-          console.log(res);
-          _this.setData({ list: res.data.data })
-        }
-      });
+      http.shop_list().then(res=>{
+        console.log(res);
+      })
+     _this.bb();
+      // wx.request({
+      //   url: 'https://api.it120.cc/zhangjianbao/shop/goods/list',
+      //   success: function (res) {
+      //     console.log(res);
+      //     _this.setData({ list: res.data.data })
+      //   }
+      // });
       // 轮播图数据
       wx.request({
         url: 'https://api.it120.cc/Andydd/banner/list',

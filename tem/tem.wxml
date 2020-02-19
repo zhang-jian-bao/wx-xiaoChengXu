@@ -1,26 +1,9 @@
-<!--pages/shouHuoAddress/shouHuoAddress.wxml-->
-<!-- 收货地址 -->
-<view class="shouHuo">
 
-    <!-- 内容 -->
-    <view class="shouHuo_con">
-      <view class="shouHuo_con_one" wx:for="{{list}}">
-        <view  class="shouHuo_con_two"  bindtap="black">
-        <view>{{item.userName}}<text>{{item.telNumber}}</text></view>
-        <view>{{item.address}}</view>
-      </view>
-      <image src="../images/edit.png"  bindtap="page"></image>
-      </view>
-    </view>
-    <!-- 底部固定 -->
-    <view class="shouHuo_con_three" bindtap="xinZengAddress">
-      <view>+</view>
-      <view>新增收货地址</view>
-      <image src="../images/rihgt.png"></image>
-    </view>
-
-     <!-- 底部固定导航 -->
-  <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
+<!-- 封装公共模板 -->
+<template name="nav">
+   <!-- 底部固定导航 -->
+  <view>
+      <view class="zi_bottom" wx:if="{{!show}}" bindtap="show">
     <image src="../images/ll.png"></image>
     <view>快速导航</view>
   </view>
@@ -49,6 +32,10 @@
     </view>
 
   </view>
+  </view>
+</template>
+<template name="aa">
+  <view style="color:res">我是公共模板</view>
+</template>
 
-<!-- 结束 -->
-</view>
+

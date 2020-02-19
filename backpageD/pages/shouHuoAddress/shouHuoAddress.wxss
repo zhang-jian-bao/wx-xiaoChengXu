@@ -31,6 +31,17 @@ page{
 }
 .shouHuo_con_two{
   line-height: 30px;
+  width: 90%;
+}
+.aa{
+  display: flex;
+}
+.bb{
+   margin-right: 20px;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .shouHuo_con_two>view:nth-child(2){
   color: #ccc;

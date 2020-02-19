@@ -4,14 +4,23 @@
 
     <!-- 内容 -->
     <view class="shouHuo_con">
-      <view class="shouHuo_con_one" wx:for="{{list}}">
-        <view  class="shouHuo_con_two"  bindtap="black">
-        <view>{{item.userName}}<text>{{item.telNumber}}</text></view>
-        <view>{{item.address}}</view>
+      <view class="shouHuo_con_one" wx:for="{{list}}"
+       bindtap="black" id="{{item.id}}">
+        <view  class="shouHuo_con_two" >
+        <view class="aa">
+        <view class="bb">{{item.linkMan}}</view>
+        <text >{{item.mobile}}</text>
+        </view>
+         <view class="aa">
+        <view class="bb">{{item.address}}</view>
+        <text wx:if="{{isMo}}">默认地址</text>
+        </view>
+        <view></view>
       </view>
-      <image src="../images/edit.png"  bindtap="page"></image>
+      <image src="../images/edit.png"></image>
       </view>
     </view>
+  
     <!-- 底部固定 -->
     <view class="shouHuo_con_three" bindtap="xinZengAddress">
       <view>+</view>
