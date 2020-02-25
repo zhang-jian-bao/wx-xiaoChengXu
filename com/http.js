@@ -84,6 +84,14 @@ function add_address(){
 function  address_xiangQin(data){
   return api('/user/shipping-address/detail/v2','get',data);
 }
+//创建订单
+function ding(data){
+  return api('/order/create','post',data);
+} 
+//获取订单列表
+function ding_list(data) {
+  return api('/order/list', 'post', data);
+}
 //导出接口
 module.exports={
   add:add,
@@ -98,5 +106,7 @@ module.exports={
   update:update,
   address_list: address_list,
   add_address:add_address,
-  address_xiangQin:address_xiangQin
+  address_xiangQin:address_xiangQin,
+  ding:ding,
+  ding_list: ding_list
 }

@@ -12,8 +12,41 @@
   </view>
   <!-- <view class="zi_xuan"> -->
   <!-- 选项卡 -->
-  <swiper current="{{num}}" class='swiper' style="height:100%; background:#eee;" duration="200" bindchange="bindchange">
-  <swiper-item><image src="../images/ding.png" class="dingDan_image"></image><view class='swiper_con'>暂无订单</view></swiper-item> 
+  <swiper current="{{num}}" class='swiper' style="height:{{height}}%; background:#eee;" duration="200" bindchange="bindchange">
+  <swiper-item>
+  <view wx:for="{{list}}" class="dingDan_list">
+  <!--头  -->
+    <view  class="dingDan_list_top">
+      <view>{{item.orderNumber}}</view>
+      <view>
+      <view>{{item.statusStr}}</view>
+      <image src="../images/rihgt.png"></image>
+      </view>
+    </view>
+    <!-- 中 -->
+    <view wx:for="{{list_one[item.id]}}"  class="dingDan_list_middle">
+      <view><image src="{{item.pic}}"></image></view>
+       <view class="dingDan_list_middle_two">
+          <view>共{{item.number}}件商品</view>
+          <view>合计：<text>${{item.amount}}</text></view>
+        </view>
+    </view>
+   
+  <!-- 尾 -->
+    <view  class="dingDan_list_bottom">
+      <view>{{item.dateAdd}}</view>
+      <view class="dingDan_list_bottom_two">
+        <view>马上付款</view>
+        <view>取消订单</view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{list}}">
+     <image src="../images/ding.png" class="dingDan_image"></image>
+      <view class='swiper_con'>暂无订单</view>
+  </view>
+  </swiper-item> 
+
   <swiper-item><image src="../images/ding.png" class="dingDan_image"></image><view class='swiper_con'>暂无订单~</view></swiper-item>
   <swiper-item><image src="../images/ding.png" class="dingDan_image"></image><view class='swiper_con'>暂无订单</view></swiper-item>  
    <swiper-item><image src="../images/ding.png" class="dingDan_image"></image><view class='swiper_con'>暂无订单~</view></swiper-item>

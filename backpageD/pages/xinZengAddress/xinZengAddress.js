@@ -11,7 +11,7 @@ Page({
     telNumber: "",
     address:'',
     list:[],
-    region:'',
+    region: ['请选择省', '请选择市', '请选择县'],
     customItem:'请选择地区',
     code:[],
     edit:false,
@@ -30,7 +30,9 @@ Page({
         title: '删除成功',
         icon: 'success'
       });
-      wx.navigateBack({})
+     wx.navigateBack({
+       
+     })
     }
     // wx.request({
     //   url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/delete',
@@ -159,38 +161,39 @@ Page({
       })
       return false;
     }else{
-      var bao = await http.add_address({
-        address: that.data.address,
-          linkMan: userName,
-          mobile: mobile,
-          provinceId:that.data.code[1],
-          cityId:that.data.code[0],
-          token:wx.getStorageSync('token')
-      });
-      console.log(bao);
-      if(bao.data.code==0){
-        wx.navigateBack({});
-      }
-      // wx.request({
-      //   url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/add',
-      //   method: 'POST',
-      //   header: {
-      //     "content-type": "application/x-www-form-urlencoded"
-      //   },
-      //   data:{
-      //     address: that.data.address,
+      // var bao = await http.add_address({
+      //   address: that.data.address,
       //     linkMan: userName,
       //     mobile: mobile,
       //     provinceId:that.data.code[1],
       //     cityId:that.data.code[0],
       //     token:wx.getStorageSync('token')
-      //   },
-      //   success(res){
-      //     console.log(res);
-      //     // 路由返回上一级
-      //     wx.navigateBack({});
-      //   }
-      // })
+      // });
+      // console.log(bao);
+      // if(bao.data.code==0){
+      //   wx.navigateBack({});
+      // }
+      wx.request({
+        url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/add',
+        method: 'POST',
+        header: {
+          "content-type": "application/x-www-form-urlencoded"
+        },
+        data:{
+          address: that.data.address,
+          linkMan: userName,
+          mobile: mobile,
+          provinceId:that.data.code[1],
+          cityId:that.data.code[0],
+          token:wx.getStorageSync('token'),
+          isDefault:true
+        },
+        success(res){
+          console.log(res);
+          // 路由返回上一级
+          wx.navigateBack({});
+        }
+      })
       // let arr = [];
       // arr.push(obj);
       // console.log(obj);
@@ -334,7 +337,7 @@ Page({
            userName: xq.data.data.info.linkMan,
            telNumber: xq.data.data.info.mobile,
            address: xq.data.data.info.address,
-           region: [],
+           region: ['请选择省','请选择市','请选择县'],
            edit:true,
            userId: xq.data.data.info.id
          })
@@ -379,7 +382,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.del();
   },
 
   /**

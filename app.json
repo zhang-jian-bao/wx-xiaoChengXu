@@ -65,7 +65,8 @@
     "navigationBarTitleText": "天使童装",
     "navigationBarTextStyle": "black",
     "pageOrientation": "auto",
-    "backgroundColor": "#ffc"
+    "backgroundColor": "#ffc",
+    "enablePullDownRefresh":false
   },
   "style": "v2",
   "tabBar": {

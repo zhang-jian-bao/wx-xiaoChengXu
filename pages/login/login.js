@@ -70,7 +70,8 @@ Page({
           },
           success(res1){
             console.log(res1);
-            console.log("注册成功")
+            console.log("注册成功");
+            this.login();//在调用登录接口，登录页面
           }
         })
       }

@@ -9,6 +9,9 @@
 page{
   height: 100%;
 }
+.qq{
+  display: flex
+}
 /* 商品列表 */
 .queRenDingDan>view:nth-child(1){
   height: 40px;
@@ -38,16 +41,25 @@ page{
   line-height: 40px;
   font-size: 12px;
 }
+.queRenDingDan_head_right_one{
+  height: 20px;
+}
 .queRenDingDan_head_right_one>text:nth-child(2){
   float: right;
 }
 .queRenDingDan_head_right_two{
   color: #ccc;
+  width: auto;
+  height: 20px;
+  line-height: 20px;
+  margin-top: 10px;
+  padding: 0 6px 0 0;
+
 }
 .queRenDingDan_head_right_two>text{
   margin-right: 10px;
 }
-.queRenDingDan_head_right_two>text:nth-child(3){
+.queRenDingDan_head_right_two>text:nth-child(4){
   float: right;
   margin-right: 0;
 }

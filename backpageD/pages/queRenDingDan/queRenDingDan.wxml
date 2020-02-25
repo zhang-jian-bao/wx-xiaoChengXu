@@ -2,18 +2,21 @@
 <!-- 确认订单页面-->
 <view class="queRenDingDan">
   <view>商品列表</view>
-    <view wx:for="{{list}}" class="queRenDingDan_head">
+    <view  class="queRenDingDan_head" wx:for="{{list}}">
       <image src="{{item.pic}}"></image>
       <view class="queRenDingDan_head_right">
        <view class="queRenDingDan_head_right_one">
          <text>{{item.name}}</text>
-        <text>￥{{item.minPrice}}</text>
+        <text>￥{{item.price}}</text>
        </view>
-        <view class="queRenDingDan_head_right_two">
-          <text>花色：{{text}}</text>
-          <text>颜色：{{text_one}}</text>
-          <text>X{{shu}}</text>
+        <view class="qq">
+          <view class="queRenDingDan_head_right_two" 
+         wx:for="{{item.sku}}" wx:for-item="pp">
+          {{pp.optionName}}:{{pp.optionValueName}} 
         </view>
+        </view>
+
+        <text>x{{item.number}}</text>
       </view>
     
     </view>
@@ -32,18 +35,18 @@
         </view>
       </view>
       <!-- 地址 -->
-      <view class="queRenDingDan_peiSong_two" wx:if="{{!radioShow}}"
-      bindtap="add" wx:if="{{!address_show}}">
+      <view class="queRenDingDan_peiSong_two" wx:if="{{!address_show}}" bindtap="add" >
         <view>+</view>
         <view>新增收货地址</view>
         <image src="../images/rihgt.png"></image>
       </view>
       <!-- 添加地址后的样式 -->
-      <view wx:if="{{address_show}}" class="add_address" bindtap="shouHuo" wx:for="{{arr}}">
-        <image src="../images/city.png"></image>
+      <view wx:if="{{address_show}}" class="add_address" bindtap="shouHuo">
+        <image src="../images/edit.png"></image>
         <view class="add_address_one">
-          <view>{{item.userName}} <text>{{item.telNumber}}</text></view>
-          <view>{{item.address}}</view>
+          <view>{{list_address.info.linkMan}} 
+          <text>{{list_address.info.mobile}}</text></view>
+          <view>{{list_address.info.address}}</view>
         </view>
         <image src="../images/rihgt.png"></image>
       </view>
@@ -65,8 +68,8 @@
     </view>
     <!-- 提交订单 -->
     <view class="queRenDingDan_peiSong_fiex">
-      <view>合计：￥50+0积分</view>
-      <view>提交订单</view>
+      <view>合计：￥{{list.minPrice}}+0积分</view>
+      <view bindtap="sub">提交订单</view>
     </view>
 
 

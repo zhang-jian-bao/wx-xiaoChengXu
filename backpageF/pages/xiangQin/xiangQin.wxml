@@ -211,32 +211,6 @@
           </view>
         
         </view>
-        <!-- <view wx:for="{{list_one}}" wx:if="{{index==1}}">
-          <view >
-          <view>{{item.name}}</view>
-            <block wx:for="{{item.childsCurGoods}}" >
-              <text bindtap="chiCun" id="{{item.id}}"
-              data-index="{{index}}"
-               class="xinagQing_shop_two_one {{num_one==index?'aa':''}}">
-               {{item.name}}</text>
-          </block>
-          
-          </view>
-        
-        </view> -->
-        <!-- <view wx:for="{{list_one}}" wx:if="{{index==2}}">
-          <view >
-          <view>{{item.name}}</view>
-            <block wx:for="{{item.childsCurGoods}}" >
-              <text bindtap="guiGe" id="{{item.id}}"
-              data-index="{{index}}"
-               class="xinagQing_shop_two_one {{num_two==index?'aa':''}}">
-               {{item.name}}</text>
-          </block>
-          
-          </view>
-        
-        </view> -->
       </view>
       <view class="xinagQing_shop_four">
         <view>购买数量</view>
@@ -257,26 +231,29 @@
 
     <view class="xinagQing_shop_one">
 
-      <view wx:for="{{list}}" class="xinagQing_shop_one_head">
-        <image src="{{item.pic}}"></image>
+      <view  class="xinagQing_shop_one_head">
+        <image src="{{list.pic}}"></image>
         <view class="xinagQing_shop_one_right">
-          <view>{{item.name}}</view>
-          <view>{{item.minPrice}}</view>
+          <view>{{list.name}}</view>
+          <view>{{list.minPrice}}</view>
         </view>
       </view>
       <view class="xinagQing_shop_two">
-        <view>花色</view>
-        <view>
-          <text class="{{num==0?'aa':''}}" data-current = "0" bindtap="check" data-text="粉色叶子">粉色叶子</text>
-          <text class="{{num==1?'aa':''}}" data-current = "1" bindtap="check" data-text="淡灰小船">淡灰小船</text>
-        </view>
-      </view>
-      <view class="xinagQing_shop_two xinagQing_shop_three">
-        <view>颜色</view>
-        <view>
-          <text class="{{num_one==0?'aa':''}}" data-current = "0" bindtap="check_one" data-text_one="红色">红色</text>
-          <text class="{{num_one==1?'aa':''}}" data-current = "1" bindtap="check_one" data-text_one="黄色">黄色</text>
-          <text class="{{num_one==2?'aa':''}}" data-current = "2" bindtap="check_one" data-text_one="蓝色">蓝色</text>
+        <view wx:for="{{list_one}}" wx:for-index="inn"
+        wx:for-item="far">
+          <view >
+          <view>{{far.name}}</view>
+            <block wx:for="{{far.childsCurGoods}}" >
+              <text bindtap="yanse" id="{{item.id}}"
+              data-index="{{index}}" data-aa="{{item}}"
+              data-fid="{{far.id}}" data-finn="{{inn}}"
+              class="xinagQing_shop_two_one {{item.active?'aa':''}}">
+
+              {{item.name}}</text>
+          </block>
+          
+          </view>
+        
         </view>
       </view>
       <view class="xinagQing_shop_four">

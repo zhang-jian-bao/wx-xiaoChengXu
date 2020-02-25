@@ -10,7 +10,78 @@ Page({
     list:[],
     list_gui:[],
     isLength:false,
-    num:null
+    num:null,
+    startX:0,
+    index:'',
+    sj:''
+  },
+  tu_one(e){//点击多选框图片，显示空白
+    if (this.data.list[e.currentTarget.dataset.index].active) {
+      this.data.list[e.currentTarget.dataset.index].active = false;
+    } else {
+      this.data.list[e.currentTarget.dataset.index].active = true;
+    }
+    this.setData({
+      list: this.data.list
+    })
+  },
+  tu(e){//点击多选框,显示图片
+  console.log(e);
+  console.log(this.data.list)
+    if (this.data.list[e.currentTarget.dataset.index].active){
+      this.data.list[e.currentTarget.dataset.index].active=false;
+    }else{
+      this.data.list[e.currentTarget.dataset.index].active=true;
+    }
+    this.setData({
+      list:this.data.list
+    })
+    this.data.sj = this.data.list[e.currentTarget.dataset.index];
+  },
+  sub(){//点击结算
+  var num=[];
+    this.data.list.forEach(v=>{
+      if(v.active){
+        num.push(this.data.sj);
+        wx.setStorageSync('sj', num);
+        wx.navigateTo({
+          url: '/backpageD/pages/queRenDingDan/queRenDingDan',
+        })
+      }
+    })
+  },
+  s(e){//移动开始
+    console.log(e);
+    this.data.index=e.currentTarget.dataset.index;//下标
+    this.data.startX=e.touches[0].clientX;//x坐标
+  },
+  m(e){//移动过程
+    console.log(e);
+    var move = e.touches[0].clientX;//移动坐标
+    var a=this.data.startX-move;
+    console.log(a);
+    if(a>0){//向左滑动
+    this.data.list[this.data.index].left=-a;
+        if(a>180){
+          this.data.list[this.data.index].left = -180;
+        }
+    }
+    this.setData({
+      list:this.data.list
+    })
+  },
+  e(e){//移动结束
+    console.log(e);
+    var end = e.changedTouches[0].clientX;//结束X坐标
+    var b=this.data.startX-end;
+    if(b>60){
+      this.data.list[this.data.index].left = -180;
+    }else{
+      this.data.list[this.data.index].left = 0;
+    }
+    this.setData({
+      list: this.data.list
+    })
   },
   //点击减
   jian(e){
@@ -120,6 +191,9 @@ Page({
     });
     console.log(info);
     if (info.data.code == 0) {
+      info.data.data.items.forEach(v=>{
+        v.active=false;//给数据里加一个变量，判断多选框状态
+      })
       that.setData({
         list: info.data.data.items,
         list_gui: info.data.data.items.sku,

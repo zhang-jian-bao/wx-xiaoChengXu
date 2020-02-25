@@ -1,4 +1,6 @@
 // pages/queRenDingDan/queRenDingDan.js
+var that;
+var http=require('../../../com/http.js');
 Page({
 
   /**
@@ -9,28 +11,59 @@ Page({
       {name:"kuaidi",value:"快递",checked:"true"},
       {name:"daodiaoziqu",value:"到店自取"}
     ],
-    list:[],
+    list:{},
     text:'',
     text_one:'',
     shu:'',
     show:false,
-    radioShow:false,
+    radioShow:false,//点击快递还是到店取货
     address:"",
     userName:'',
     telNumber:"",
-    address_show:false,
-    arr:[]
+    address_show:false,//是否有默认收货地址
+    arr:[],
+    cid:'',
+    list_address:{},
+    shu:''
+  },
+  async sub(){//点击提交订单，创建订单
+    var num = []; var str='';var obj={}
+    this.data.list.forEach(v=>{
+    
+      v.sku.forEach(item=>{
+        str += item.optionId + ":" + item.optionValueId+','
+      })
+      obj={
+        goodsId: that.data.cid,
+         number: that.data.shu, 
+         propertyChildIds: str,
+          logisticsType: 0 
+      }
+      num.push(obj);
+      str="";
+    })
+    // console.log(str)
+    var ding=await http.ding({
+      goodsJsonStr: JSON.stringify(num),
+      token:wx.getStorageSync('token')
+    });
+    console.log(ding);
+    if(ding.data.code==0){
+      wx.navigateTo({
+        url: '/backpageA/pages/dingDan/dingDan',
+      })
+    }
   },
   //点击收货地址，跳转到编辑地址界面
   shouHuo(e){
     wx.navigateTo({
-      url: '/pages/shouHuoAddress/shouHuoAddress',
+      url: '/backpageD/pages/shouHuoAddress/shouHuoAddress',
     })
   },
   //点击添加收货地址
   add:function(e){
     wx.navigateTo({
-      url: "/pages/xinZengAddress/xinZengAddress",
+      url: "/backpageD/pages/xinZengAddress/xinZengAddress",
     })
   },
   //点击首页跳转
@@ -73,34 +106,49 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    let that=this;
+  async onLoad(options) {
+    // console.log('onload')
+    that=this;
+    // var shu=options.shu;
+    // var a=JSON.parse(options.a);
+    // var id=options.id;
+    // console.log(id);
+    // console.log(a);
     //获取本地的商品数据
-    wx.getStorage({
-      key: 'key',
-      success: function(res) {
-        console.log(res);
-        that.setData({
-          list:res.data.list,
-          text:res.data.text,
-          text_one:res.data.text_one,
-          shu:res.data.shu
-        })
+    // var list=await http.detail({
+    //   id:id,
+    //   token:wx.getStorageSync('token')
+    // });
+    // console.log(list);
+    // if(list.data.code==0){
+    //   that.setData({
+    //     list:list.data.data.basicInfo,
+    //     arr:a,
+    //     liat_one: list.data.data.properties,
+    //     cid:id,
+    //     shu:shu
+    //   })
+    // }
+  },
+   //获取默认地址接口
+  mo_address(){
+    wx.request({
+      url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/default/v2',
+      method: 'GET',
+      data: {
+        token: wx.getStorageSync('token')
       },
-    });
-    // 获取添加到本地的地址
-    wx.getStorage({
-      key: 'address',
-      success: function(res) {
+      success(res) {
         console.log(res);
-        that.setData({
-          arr:res.data,
-          address_show:true
-        })
-      },
+        if (res.data.code == 0) {
+          that.setData({
+            list_address: res.data.data,
+            address_show: true
+          })
+        }
+      }
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -111,10 +159,22 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+ onShow() {
+   this.mo_address();//调用默认地址接口
+   this.shop_sub();//获取本地数据
 
   },
-
+  //获取本地要购买的订单
+  shop_sub(){
+    var shoping=wx.getStorageSync('sj');
+    shoping.forEach(v=>{
+      that.data.shu = v.number;
+      that.data.cid = v.goodsId;
+    })
+    that.setData({
+      list:shoping
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

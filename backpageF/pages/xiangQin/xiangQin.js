@@ -37,30 +37,57 @@ Page({
     index_one:'',
     index_two:'',
     shopId:'',
-    good_id:''
+    good_id:'',
+    cid:''
   },
   //点击立即购买
-  mai:function(e){
-    if (that.data.arr == "" || that.data.arr_one == "" || that.data.arr_two == "") {
-      wx.showToast({
-        title: '请选择规格',
-        icon: 'none',
-        duration: 1500
-      })
-    } else {
-      wx.setStorage({
-        key: 'key',
-        data: {
-          list: this.data.list,
-          text: this.data.text,
-          text_one: this.data.text_one,
-          shu: this.data.shu
-        },
-      })
+  async mai(e){
+
+    var arr = that.data.list_one;
+
+    if (arr) {
+      var num = [];
+
+      for (var i = 0; i < arr.length; i++) {
+        for (var j = 0; j < arr[i].childsCurGoods.length; j++) {
+
+          if (arr[i].childsCurGoods[j].active == true) {
+         
+            num.push(arr[i].childsCurGoods[j])
+          }
+        }
+
+
+      }
+
+      //判断  定义存储  当前选中的数组  跟原规格的数组长度是否相等   不相等提示和return  退出  
+      if (num.length != arr.length) {
+        wx.showToast({
+          title: '请选择规格',
+          icon: 'none',
+          duration: 2000
+        })
+
+        return
+      }
+      var a = JSON.stringify(num);
       wx.navigateTo({
-        url: '/backpageD/pages/queRenDingDan/queRenDingDan',
+        url: '/backpageD/pages/queRenDingDan/queRenDingDan?id=' + that.data.cid + '&a=' + a + '&shu=' + that.data.shu
+      })
+      //加入购物车的接口
+        that.setData({
+          shop: false
+        })
+    } else {
+        that.setData({
+          shop: false
+        })
+      wx.navigateTo({
+        url: '/backpageD/pages/queRenDingDan/queRenDingDan?id=' + that.data.cid+'&shu='+that.data.shu
       })
     }
+   
+   
   },
   //点击选择规格
   yanse(e){
@@ -92,19 +119,26 @@ Page({
    //点击加入购物车
   async jiaRu(e){
     var arr=that.data.list_one;
+
     if(arr){
       var num = [];
       var str='';
       for(var i=0;i<arr.length;i++){
-        arr[i].childsCurGoods.forEach((v)=>{
-          if(v.active==true){
-            var obj = { 'optionId': v.propertyId,'optionValueId':v.id};
+        for (var j = 0; j < arr[i].childsCurGoods.length;j++){
+
+          if (arr[i].childsCurGoods[j].active == true) {
+            var obj = { 'optionId': arr[i].childsCurGoods[j].propertyId, 'optionValueId': arr[i].childsCurGoods[j].id };
             num.push(obj);
-           str+= v.propertyId+':'+v.id+','
+            str += arr[i].childsCurGoods[j].propertyId + ':' + arr[i].childsCurGoods[j].id + ','
           }
-        })
+        }
+        
+      
       }
+    
       //判断  定义存储  当前选中的数组  跟原规格的数组长度是否相等   不相等提示和return  退出  
+      // console.log(arr.length);
+      // console.log(num.length)
       if (num.length != arr.length) {
         wx.showToast({
           title: '请选择规格',
@@ -114,6 +148,7 @@ Page({
 
         return
       }
+  
         //加入购物车的接口
       var add=await http.add({
         goodsId: that.data.shopId,
@@ -133,23 +168,6 @@ Page({
              })
            }
     
-        // wx.request({
-        //   url: 'https://api.it120.cc/zhangjianbao/shopping-cart/add',
-        //   method: 'POST',
-        //   header: {
-        //     "content-type": "application/x-www-form-urlencoded"
-        //   },
-        //   data: {
-        //     goodsId: that.data.shopId,
-        //     number: that.data.shu,
-        //     sku: JSON.stringify(num),
-        //     token: wx.getStorageSync('token')
-        //   },
-        //   success(res) {
-        //     console.log(res);
-        //   
-        //   }
-        // })
         // // 获取价格的接口
         var price=await http.price({
               goodsId: that.data.shopId,
@@ -160,41 +178,36 @@ Page({
           
               console.log('获取价格成功')
             }
-        // wx.request({
-        //   url: 'https://api.it120.cc/zhangjianbao/shop/goods/price',
-        //   method:'GET',
-        //   data:{
-        //     goodsId: that.data.shopId,
-        //     propertyChildIds:str
-        //   },
-        //   success(res){
-        //     if(res.data.code==0){
-        //       console.log(res);
-        //       console.log('获取价格成功')
-        //     }
-        //   }
-        // })
-      
-    }
-  },
-  //点击花色
-  check: function (e) {
-    let that = this;
-    console.log(e);
-    let text = e.target.dataset.text
-      this.setData({
-        num: e.target.dataset.current,
-        text:text
-      })
+    }else{
 
-  },
-  check_one: function (e) {
-    let that = this;
-    let text = e.target.dataset.text_one
-      this.setData({
-        num_one: e.target.dataset.current,
-        text_one: text
+      //加入购物车的接口
+      var add = await http.add({
+        goodsId: that.data.shopId,
+        number: that.data.shu,
+        token: wx.getStorageSync('token')
+      });
+      console.log(add);
+      if (add.data.code == 0) {
+        wx.showToast({
+          title: '加入购物车！', // 标题
+          icon: 'success',  // 图标类型，默认success
+          duration: 1500  // 提示窗停留时间，默认1500ms
+        });
+        that.setData({
+          shop: false
+        })
+      }
+
+      // // 获取价格的接口
+      var price = await http.price({
+        goodsId: that.data.shopId
       })
+      console.log(price);
+      if (price.data.code == 0) {
+
+        console.log('获取价格成功')
+      }
+    }  
     
   },
   //点击隐藏购物车
@@ -324,7 +337,8 @@ Page({
            good_id: res.data.data.basicInfo.id,
            shopId:id,
            list: res.data.data.basicInfo,
-           list_one: res.data.data.properties
+           list_one: res.data.data.properties,
+           cid:id
          })
    
       }

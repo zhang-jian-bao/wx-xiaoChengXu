@@ -15,8 +15,14 @@
 
 <template name="shop_list">
 <!-- 添加到购物车的数据，有显示，没有就隐藏 -->
-  <view wx:for="{{list}}" wx:if="{{isLength}}" class="shop_list">
-    <image src="{{item.pic}}"></image>
+  <view wx:for="{{list}}" wx:if="{{isLength}}" class="shop_aa">
+    <view class="shop_list" bindtouchstart="s" bindtouchmove="m"
+    bindtouchend="e" data-index="{{index}}"
+    style="margin-left:{{item.left}}rpx">
+      <view class="tu" wx:if="{{!item.active}}" bindtap="tu"
+      data-index="{{index}}"></view>
+      <image class="tu_one" wx:if="{{item.active}}" src="../images/q.png" bindtap="tu_one" data-index="{{index}}"></image>
+      <image class="aa" src="{{item.pic}}"></image>
     <view class="shop_list_one">
       <view class="shop_list_one_left">
         <view class="shop_list_one_left_text">{{item.name}}</view>
@@ -26,22 +32,29 @@
         </text>
       </view>
       <view class="shop_list_one_right">
-       <button class="btn" bindtap="del" 
-       data-key="{{item.key}}">删除</button>
+     
         <view>
-            <button class="btn btn_one" bindtap="jian"
+            <button class="btn btn_one" catchtap="jian"
             data-num="{{item.number}}"
             data-key="{{item.key}}"
             data-index="{{index}}">-</button>
             <view class="shop_list_one_right_num">{{item.number}}</view>
-            <button class="btn btn_one" bindtap="jia"
+            <button class="btn btn_one" catchtap="jia"
             data-num="{{item.number}}"
             data-key="{{item.key}}"
              data-index="{{index}}">+</button>
         </view>
       </view>
+        
     </view>
-  
+  <button class="btnn" bindtap="del" 
+       data-key="{{item.key}}">删除</button>
+    </view>
+    
+  </view>
+  <view class="fiex">
+    <view>合计：124</view>
+    <view bindtap="sub">结算</view>
   </view>
 </template>
 

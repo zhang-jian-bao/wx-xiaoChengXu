@@ -12,26 +12,19 @@ Page({
     telNumber:'',
     address:'',
     list:[],//数据
-    isMo:false//默认状态
+    isMo:false,//默认状态
+    aa:{}
   },
-  //点击编辑进入添加地址页面
+  
   // page(){
   //   wx.navigateTo({
   //     url: '/backpageD/pages/xinZengAddress/xinZengAddress?userName='+this.data.userName+'&telNumber'+this.data.telNumber+'&address'+this.data.address,
   //   })
   // },
-  //点击返回上一页
+//点击编辑进入添加地址页面
   black(e){
     console.log(e);
     var that=this;
-    // var aa=that.data.list.find((v)=>{
-    //   console.log(v.id);
-    //   return v.id == e.currentTarget.id
-    // })
-    // console.log(e.currentTarget.id)
-    // console.log(aa)
-    // // if(e.currentTarget.id==id){
-    //   var list = JSON.stringify(aa);
       wx.navigateTo({
         url: '/backpageD/pages/xinZengAddress/xinZengAddress?id='+ 
         e.currentTarget.id,
@@ -80,43 +73,19 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  // mo(){//获取默认地址
-  //   wx.request({
-  //     url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/default/v2',
-  //     method: 'GET',
-  //     data: {
-  //       token: wx.getStorageSync('token')
-  //     },
-  //     success(res) {
-  //       console.log(res);
-  //       if (res.data.code == 0) {
-  //         res.data.data.info.aa=true;
-  //         that.setData({
-  //           list: res.data.data,
-  //           isMo: res.data.data.info.aa
-  //         })
-  //       }
-  //     }
-  //   })
-  // },
-  async so() { //获取所有的收货地址
-    var list = await http.address_list({
+ async mo(e){//设置默认地址
+  console.log(e);
+    var edit = await http.update({
+      id: e.currentTarget.id,
+      isDefault:true,
       token: wx.getStorageSync('token')
-    })
-    console.log(list);
-    if (list.data.code == 0) {
-      //默认地址有点问题
-      // for (var i = 0; i < res.data.data.length;i++){
-      //   res.data.data[i].aa=false;
-      //   var aa=res.data.data[0].aa=true;
-      // }
-      that.setData({
-        list: list.data.data
-        // isMo:aa
-      })
+    });
+    console.log(edit)
+    if(edit.data.code==0){
+      this.so()
     }
     // wx.request({
-    //   url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/list',
+    //   url: 'https://api.it120.cc/zhangjianbao/user/shipping-address/default/v2',
     //   method: 'GET',
     //   data: {
     //     token: wx.getStorageSync('token')
@@ -124,31 +93,37 @@ Page({
     //   success(res) {
     //     console.log(res);
     //     if (res.data.code == 0) {
-    //       //默认地址有点问题
-    //       // for (var i = 0; i < res.data.data.length;i++){
-    //       //   res.data.data[i].aa=false;
-    //       //   var aa=res.data.data[0].aa=true;
-    //       // }
+    //       // res.data.data.info.isDefault = false;
+    //       res.data.data.info.isDefault = true;
     //       that.setData({
-    //         list: res.data.data
-    //         // isMo:aa
+    //         aa: res.data.data,
+    //         // isMo: res.data.data.info.aa
     //       })
     //     }
     //   }
     // })
   },
+  async so() { //获取所有的收货地址
+    var list = await http.address_list({
+      token: wx.getStorageSync('token')
+    })
+    console.log(list);
+    if (list.data.code == 0) {
+      that.setData({
+        list: list.data.data
+      })
+    }
+  },
   onLoad: function (options) {
      that=this;
     //获取所有的收货地址
      that.so();
-    //  that.mo();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
