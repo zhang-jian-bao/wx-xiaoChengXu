@@ -27,20 +27,25 @@ Page({
     shu:''
   },
   async sub(){//点击提交订单，创建订单
-    var num = []; var str='';var obj={}
+    var num = [];
     this.data.list.forEach(v=>{
-    
-      v.sku.forEach(item=>{
-        str += item.optionId + ":" + item.optionValueId+','
-      })
+      var str = ''; var obj = {}
+     
+     if(v.sku){
+       v.sku.forEach(item => {
+         str += item.optionId + ":" + item.optionValueId + ','
+       })
+     }else{
+       str=""
+     }
       obj={
-        goodsId: that.data.cid,
-         number: that.data.shu, 
+        goodsId: v.goodsId,
+         number: v.number, 
          propertyChildIds: str,
           logisticsType: 0 
       }
       num.push(obj);
-      str="";
+      // console.log(v.goodsId,that.data.cid)
     })
     // console.log(str)
     var ding=await http.ding({
@@ -48,12 +53,32 @@ Page({
       token:wx.getStorageSync('token')
     });
     console.log(ding);
+    var b = '';
     if(ding.data.code==0){
+      
+      var a = wx.getStorageSync('sj');
+     for(var i=0;i<a.length;i++){
+       b = await http.remove({
+         key: a[i].key,
+         token: wx.getStorageSync('token')
+       })
+     }
+      if (b.data.code == 0) {
+        console.log("删除数据成功")
+
+      }
       wx.navigateTo({
         url: '/backpageA/pages/dingDan/dingDan',
       })
+    }else if(ding.data.code==60000||ding.data.code==60001){
+      wx.showToast({
+        title: '商品库存不足，请重新下单',
+        icon:'none'
+      })
     }
   },
+  //点击提交的时候，购物车数据删除
+ 
   //点击收货地址，跳转到编辑地址界面
   shouHuo(e){
     wx.navigateTo({

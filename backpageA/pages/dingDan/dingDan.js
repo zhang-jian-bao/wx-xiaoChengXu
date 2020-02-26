@@ -13,6 +13,21 @@ Page({
     list_one:{},
     height:100+'%'
   },
+  //取消订单
+  async quXiao(){
+    var id='';
+    that.data.list.forEach(v=>{
+       id= v.id;
+    })
+    console.log(id);
+    var a = await http.delate_ding({
+      orderId:id,
+      token:wx.getStorageSync('token')
+    })
+    if(a.data.code==0){
+      this.dingList();//调用，重新页面渲染
+    }
+  },
   //点击首页跳转
   index: function (e) {
     wx.switchTab({//跳转到某个页面
@@ -73,7 +88,6 @@ Page({
       num:num
     })
    
-  
   },
   // onPageScroll(e) {
   //   console.log(e);
@@ -110,10 +124,30 @@ Page({
     });
     console.log(list);
     if(list.data.code==0){
+      var a = ''
+      list.data.data.orderList.forEach(v => {
+        a = v.status
+      })
+      //当几分钟后，未支付，自动删除订单
+      //有点问题，要点击一下取消订单才可以
+      if (a != 0) {
+        that.quXiao();
+        this.setData({
+          list: list.data.data.orderList,
+          list_one: list.data.data.goodsMap,
+          height: 100
+        })
+      }
       this.setData({
         list: list.data.data.orderList,
         list_one: list.data.data.goodsMap,
         height: (list.data.data.orderList.length)*46
+      })
+    } else if (list.data.code == 700) {
+      this.setData({
+        list: [],
+        list_one: [],
+        height:100
       })
     }
   },

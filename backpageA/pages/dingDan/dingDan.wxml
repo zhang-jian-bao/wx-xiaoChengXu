@@ -37,7 +37,7 @@
       <view>{{item.dateAdd}}</view>
       <view class="dingDan_list_bottom_two">
         <view>马上付款</view>
-        <view>取消订单</view>
+        <view bindtap="quXiao">取消订单</view>
       </view>
     </view>
   </view>

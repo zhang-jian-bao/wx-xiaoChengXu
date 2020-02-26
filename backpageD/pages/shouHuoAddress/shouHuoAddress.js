@@ -112,6 +112,11 @@ Page({
       that.setData({
         list: list.data.data
       })
+      //当code为700的时候，没有数据，让list为空就好了
+    }else if(list.data.code==700){
+      that.setData({
+        list: []
+      })
     }
   },
   onLoad: function (options) {

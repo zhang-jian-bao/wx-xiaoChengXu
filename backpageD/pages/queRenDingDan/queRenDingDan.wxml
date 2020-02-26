@@ -35,13 +35,14 @@
         </view>
       </view>
       <!-- 地址 -->
-      <view class="queRenDingDan_peiSong_two" wx:if="{{!address_show}}" bindtap="add" >
+      <view class="queRenDingDan_peiSong_two" wx:if="{{!address_show}}" bindtap="add" hidden="{{!radioShow}}">
         <view>+</view>
         <view>新增收货地址</view>
         <image src="../images/rihgt.png"></image>
       </view>
       <!-- 添加地址后的样式 -->
-      <view wx:if="{{address_show}}" class="add_address" bindtap="shouHuo">
+      <view wx:if="{{address_show}}" class="add_address" bindtap="shouHuo"
+      hidden="{{radioShow}}">
         <image src="../images/edit.png"></image>
         <view class="add_address_one">
           <view>{{list_address.info.linkMan}} 

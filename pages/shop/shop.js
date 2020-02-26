@@ -13,16 +13,21 @@ Page({
     num:null,
     startX:0,
     index:'',
-    sj:''
+    sj:'',
+    sk:false
   },
   tu_one(e){//点击多选框图片，显示空白
     if (this.data.list[e.currentTarget.dataset.index].active) {
       this.data.list[e.currentTarget.dataset.index].active = false;
+      this.data.sk = false;
     } else {
       this.data.list[e.currentTarget.dataset.index].active = true;
+      this.data.sk=true;
     }
+    // this.data.sj = this.data.list[e.currentTarget.dataset.index];
     this.setData({
-      list: this.data.list
+      list: this.data.list,
+      sk: this.data.sk
     })
   },
   tu(e){//点击多选框,显示图片
@@ -30,25 +35,32 @@ Page({
   console.log(this.data.list)
     if (this.data.list[e.currentTarget.dataset.index].active){
       this.data.list[e.currentTarget.dataset.index].active=false;
+      this.data.sk = false;
     }else{
       this.data.list[e.currentTarget.dataset.index].active=true;
+      this.data.sk = true;
     }
     this.setData({
-      list:this.data.list
+      list:this.data.list,
+      sk: this.data.sk
     })
-    this.data.sj = this.data.list[e.currentTarget.dataset.index];
+   
   },
   sub(){//点击结算
   var num=[];
     this.data.list.forEach(v=>{
-      if(v.active){
-        num.push(this.data.sj);
-        wx.setStorageSync('sj', num);
-        wx.navigateTo({
-          url: '/backpageD/pages/queRenDingDan/queRenDingDan',
-        })
+      if(!v.active){
+        return false;
+      }else{
+        num.push(v);
       }
     })
+   if(this.data.sk){//当这个状态为true的时候，才可以提交
+     wx.setStorageSync('sj',num);
+     wx.redirectTo({
+       url: '/backpageD/pages/queRenDingDan/queRenDingDan',
+     })
+   }
   },
   s(e){//移动开始
     console.log(e);
