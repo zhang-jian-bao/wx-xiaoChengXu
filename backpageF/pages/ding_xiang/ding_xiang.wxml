@@ -1,0 +1,58 @@
+<!--backpageF/pages/ding_xiang/ding_xiang.wxml-->
+<view class="dingXinag">
+<!-- 订单详情 -->
+  <view class="dingXinag_top" wx:for="{{list}}">
+    <image src="../images/s.png"></image>
+    <view wx:if="{{item.status}}">待付款</view>
+  </view>
+  <view class="dingXinag_kuai">
+    <view class="dingXiang_kuai_one">
+      <image src="../images/fa.png"></image>
+      <view>快递单号：</view>
+    </view>
+    <view class="dingXiang_kuai_two">暂无物流信息</view>
+  </view>
+
+<view class="dingXinag_kuai dingXinag_di">
+    <view class="dingXiang_kuai_one">
+      <image src="../images/edit.png"></image>
+      <view >{{list_address.linkMan}} {{list_address.mobile}}</view>
+    </view>
+    <view class="dingXiang_kuai_two">
+      {{list_address.cityStr}} {{list_address.provinceStr}}
+       {{list_address.address}}
+    </view>
+  </view>
+
+  <view class="dingXinag_list">
+    <view>商品信息</view>
+    <view wx:for="{{list}}" class="dingXinag_list_middle">  
+        <image src="{{item.pic}}"></image>
+        <view class="dingXinag_list_middle_two">
+          <view>{{item.goodsName}}</view>
+          <view wx:if="{{item.property}}">{{item.property}}</view>
+        </view>
+        <view class="dingXinag_list_middle_three">
+          <view>${{item.amount}}</view>
+          <view>x{{item.number}}</view>
+        </view>
+    </view>
+    <view class="dingXiang_bottom" wx:for="{{list}}">
+      <view class="dingXiang_bottom_one">
+        <view>商品金额</view>
+        <view>${{item.amount}}</view>
+      </view>
+       <view class="dingXiang_bottom_one">
+        <view>运费</view>
+        <view>${{item.amount}}</view>
+      </view>
+       <view class="dingXiang_bottom_one">
+        <view>应付总额</view>
+        <view>{{item.amount*item.number}}</view>
+      </view>
+    </view>
+
+  </view>
+
+
+</view>

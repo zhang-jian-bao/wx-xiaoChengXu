@@ -55,7 +55,8 @@
     {
       "root": "backpageF",
       "pages": [
-        "pages/xiangQin/xiangQin"
+        "pages/xiangQin/xiangQin",
+        "pages/ding_xiang/ding_xiang"
       ]
     }
   ],

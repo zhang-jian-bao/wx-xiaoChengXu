@@ -13,6 +13,17 @@ Page({
     list_one:{},
     height:100+'%'
   },
+  //点击待付款跳转到订单详情
+  dingXiang(){
+    var id='',num='';
+    this.data.list.forEach(v=>{
+      id=v.id;
+      num = v.orderNumber;
+    })
+    wx.navigateTo({
+      url: '/backpageF/pages/ding_xiang/ding_xiang?id='+id,
+    })
+  },
   //取消订单
   async quXiao(){
     var id='';
@@ -76,6 +87,7 @@ Page({
         num: e.target.dataset.current
       })
     }
+    this.dingList(e.target.dataset.current);
   },
   /**
    * 生命周期函数--监听页面加载
@@ -83,28 +95,12 @@ Page({
   onLoad: function (options) {
     that=this;
     //接受点击代发货传递过来的参数
-    let num=options.num;
-    this.setData({
-      num:num
-    })
+    // let num=options.num;
+    // this.setData({
+    //   num:num
+    // })
    
   },
-  // onPageScroll(e) {
-  //   console.log(e);
-  //   wx.getSystemInfo({
-  //     success(res) {
-  //       console.log(res.windowHeight);
-  //       var a = res.windowHeight;
-  //       var b=100;
-  //       that.setData({
-  //         //获取当前实时高度-->如果大于当前的页面，高度auto，小于的话，就减去
-  //         //上面的高度。得出当前的高度
-  //         height: e.scrollTop > res.windowHeight-40?
-  //           res.windowHeight+100+'%' : res.windowHeight - 40 + 'px'
-  //       })
-  //     }
-  //   })
-  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -116,11 +112,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.dingList();
+    this.dingList(0);
   },
-  async dingList(){
+  async dingList(a){
     var list = await http.ding_list({
-      token:wx.getStorageSync('token')
+      token:wx.getStorageSync('token'),
+      status:a
     });
     console.log(list);
     if(list.data.code==0){

@@ -96,6 +96,10 @@ function ding_list(data) {
 function delate_ding(data){
   return api('/order/delete','post',data);
 }
+//订单详情
+function ding_xiang(data) {
+  return api('/order/detail', 'get', data);
+}
 //导出接口
 module.exports={
   add:add,
@@ -113,5 +117,6 @@ module.exports={
   address_xiangQin:address_xiangQin,
   ding:ding,
   ding_list: ding_list,
-  delate_ding: delate_ding
+  delate_ding: delate_ding,
+  ding_xiang: ding_xiang
 }
